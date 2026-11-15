@@ -51,7 +51,7 @@ export const HowItWorks: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF8F5] border border-[#E8E1D5] text-xs font-mono font-semibold text-[#0E283F] mb-1">
             <Clock size={13} className="text-[#3E5C10]" />
-            <span>DIAGRAMA DE RUTA ÁGIL</span>
+            <span>CIRCUITO LOGÍSTICO CONTINUO</span>
           </div>
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
             De tu tienda en Wisconsin a la puerta de tu gente
@@ -61,50 +61,55 @@ export const HowItWorks: React.FC = () => {
           </p>
         </div>
 
-        {/* Diagrama de 4 Estaciones con Ilustraciones Vectoriales */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step) => (
-            <div
-              key={step.num}
-              className="bg-[#FAF8F5] rounded-3xl p-6 sm:p-7 border border-[#E8E1D5] hover:border-[#0E283F] transition-all duration-300 group flex flex-col justify-between space-y-5 hover:shadow-md"
-            >
-              <div className="space-y-4">
-                {/* Cabecera del paso */}
-                <div className="flex items-center justify-between border-b border-[#E8E1D5] pb-3">
-                  <span className="font-mono font-black text-2xl text-[#0E283F]">
-                    {step.num}
-                  </span>
-                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-white text-[#3E5C10] font-mono font-bold text-xs uppercase tracking-wider border border-[#E8E1D5]">
-                    {step.speedTag}
-                  </span>
+        {/* Diagrama de 4 Estaciones con Línea de Ruta Interconectada */}
+        <div className="relative">
+          {/* Línea de tránsito punteada entre estaciones en desktop */}
+          <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-0.5 border-t-2 border-dashed border-[#7BA029]/30 z-0 pointer-events-none"></div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+            {steps.map((step) => (
+              <div
+                key={step.num}
+                className="bg-[#FAF8F5] rounded-3xl p-6 sm:p-7 border border-[#E8E1D5] hover:border-[#0E283F] transition-all duration-300 group flex flex-col justify-between space-y-5 hover:shadow-xs"
+              >
+                <div className="space-y-4">
+                  {/* Cabecera del paso sin borde anidado */}
+                  <div className="flex items-center justify-between border-b border-[#E8E1D5] pb-3">
+                    <span className="font-mono font-black text-2xl text-[#0E283F]">
+                      {step.num}
+                    </span>
+                    <span className="text-[#3E5C10] font-mono font-bold text-xs uppercase tracking-wider">
+                      {step.speedTag}
+                    </span>
+                  </div>
+
+                  {/* Ilustración Vectorial Editorial */}
+                  <div className="w-full flex items-center justify-center py-2">
+                    {step.illustration}
+                  </div>
+
+                  {/* Título y descripción */}
+                  <div className="space-y-1.5 pt-1">
+                    <span className="text-xs font-mono font-semibold text-slate-700 block uppercase tracking-wider">
+                      {step.stage}
+                    </span>
+                    <h3 className="font-display font-bold text-xl text-[#0E283F] group-hover:text-[#183D61] transition-colors">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-pretty font-normal">
+                      {step.desc}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Ilustración Vectorial Editorial */}
-                <div className="w-full flex items-center justify-center py-2">
-                  {step.illustration}
-                </div>
-
-                {/* Título y descripción */}
-                <div className="space-y-1.5 pt-1">
-                  <span className="text-xs font-mono font-semibold text-slate-500 block uppercase tracking-wider">
-                    {step.stage}
-                  </span>
-                  <h3 className="font-display font-bold text-xl text-[#0E283F] group-hover:text-[#183D61] transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-pretty font-normal">
-                    {step.desc}
-                  </p>
+                {/* Indicador de avance hacia el siguiente paso */}
+                <div className="pt-3 border-t border-[#E8E1D5] flex items-center justify-between text-xs font-mono text-slate-600 group-hover:text-[#0E283F] transition-colors">
+                  <span>Estación {step.num} de 04</span>
+                  <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform text-[#3E5C10]" />
                 </div>
               </div>
-
-              {/* Indicador de avance hacia el siguiente paso */}
-              <div className="pt-3 border-t border-[#E8E1D5] flex items-center justify-between text-xs font-mono text-slate-600 group-hover:text-[#0E283F] transition-colors">
-                <span>Estación {step.num} de 04</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform text-[#3E5C10]" />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Barra de Certidumbre */}

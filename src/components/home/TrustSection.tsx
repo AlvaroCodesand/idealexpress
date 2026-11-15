@@ -103,7 +103,7 @@ export const TrustAndFaqRow: React.FC = () => {
               </p>
               <Link
                 href="/tarifas"
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 text-center bg-white hover:bg-[#FAF8F5] text-[#0E283F] font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-xs active:scale-95"
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 text-center bg-white hover:bg-[#FAF8F5] text-[#0E283F] font-bold rounded-xl text-xs uppercase tracking-wider transition active:scale-95"
               >
                 <span>Ver medidas y calculadora</span>
                 <ArrowRight size={14} className="text-[#3E5C10]" />

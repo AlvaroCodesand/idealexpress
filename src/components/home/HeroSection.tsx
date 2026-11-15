@@ -48,9 +48,9 @@ export const HeroSection: React.FC = () => {
         {/* 3. Barra de Servicio Horizontal Alineada al Eje de Lectura */}
         <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-2xl border border-white/40 text-[#0E283F] max-w-4xl">
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-5">
-            {/* Pilares a la Izquierda */}
-            <div className="flex flex-wrap items-center justify-between sm:justify-start gap-6 text-xs divide-x divide-[#E8E1D5]">
-              <div className="text-left">
+            {/* Pilares a la Izquierda con Espaciado Simétrico */}
+            <div className="flex flex-wrap items-center justify-between sm:justify-start text-xs divide-x divide-[#E8E1D5]">
+              <div className="pr-6 text-left">
                 <span className="text-slate-500 block font-mono text-[11px] uppercase">Tarifa fija oficial</span>
                 <span className="text-xl sm:text-2xl font-mono font-black text-[#0E283F]">
                   ${TARIFF_CONFIG.pricePerPound}{" "}
@@ -59,7 +59,7 @@ export const HeroSection: React.FC = () => {
                 <span className="text-slate-500 block text-[11px]">Mínimo 15 lbs</span>
               </div>
 
-              <div className="pl-6 text-left">
+              <div className="px-6 text-left">
                 <span className="text-slate-500 block font-mono text-[11px] uppercase">Tiempo de entrega</span>
                 <span className="text-lg sm:text-xl font-display font-bold text-[#0E283F] block">
                   2 a 3 semanas
@@ -82,7 +82,7 @@ export const HeroSection: React.FC = () => {
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl transition shadow-xs active:scale-95 text-xs sm:text-sm tracking-wide"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl transition active:scale-95 text-xs sm:text-sm tracking-wide"
               >
                 <MessageCircle size={17} />
                 <span>Cotizar por WhatsApp</span>
@@ -90,7 +90,7 @@ export const HeroSection: React.FC = () => {
 
               <Link
                 href="/agentes"
-                className="inline-flex items-center justify-center gap-1.5 px-5 py-3 bg-[#0E283F] hover:bg-[#183D61] text-white font-bold rounded-xl transition shadow-xs text-xs sm:text-sm tracking-wide"
+                className="inline-flex items-center justify-center gap-1.5 px-5 py-3 bg-[#0E283F] hover:bg-[#183D61] text-white font-bold rounded-xl transition text-xs sm:text-sm tracking-wide"
               >
                 <MapPin size={16} className="text-[#8FB838]" />
                 <span>Buscar Tienda</span>
@@ -98,7 +98,7 @@ export const HeroSection: React.FC = () => {
 
               <Link
                 href="/tarifas"
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#0E283F] font-bold rounded-xl border border-[#E8E1D5] transition text-xs sm:text-sm"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#0E283F] font-bold rounded-xl transition text-xs sm:text-sm"
               >
                 <Package size={16} className="text-slate-600" />
                 <span>Ver Tarifas</span>

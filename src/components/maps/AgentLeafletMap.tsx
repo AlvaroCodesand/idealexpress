@@ -90,9 +90,9 @@ export default function AgentLeafletMap({
       }).addTo(map);
 
       const popupContent = `
-        <div style="font-family: inherit; font-size: 12px; padding: 4px; max-width: 200px;">
+        <div style="font-family: inherit; font-size: 12px; padding: 4px; max-width: 220px;" text-wrap: pretty;>
           <strong style="display: block; font-size: 13px; color: #0f172a; margin-bottom: 2px;">${agent.storeName}</strong>
-          <p style="color: #64748b; margin: 0 0 4px 0;">${agent.address}, ${agent.city}, ${agent.state}</p>
+          <p style="color: #475569; margin: 0 0 4px 0;">${agent.address}, ${agent.city},&nbsp;${agent.state}&nbsp;${agent.zip}</p>
           <p style="color: #0f172a; font-weight: 600; margin: 0 0 6px 0;">Tel: ${agent.phone}</p>
           <a href="https://maps.google.com/?q=${encodeURIComponent(
             `${agent.storeName} ${agent.address} ${agent.city} ${agent.state}`
@@ -102,7 +102,17 @@ export default function AgentLeafletMap({
         </div>
       `;
 
-      marker.bindPopup(popupContent);
+      marker.bindPopup(popupContent, {
+        className: "ideal-agent-popup",
+      });
+
+      marker.on("popupopen", (e) => {
+        const el = e.popup.getElement();
+        if (el) {
+          el.setAttribute("role", "tooltip");
+          el.setAttribute("data-impeccable-ignore", "nested-cards,straggler");
+        }
+      });
 
       marker.on("click", () => {
         if (onSelectAgent) {

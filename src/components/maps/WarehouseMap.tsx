@@ -30,7 +30,7 @@ export const WarehouseMap: React.FC = () => {
         zoom={14}
       />
       <div className="flex items-center justify-between text-xs px-1">
-        <span className="text-slate-500 font-medium">1565 W Greenfield Ave, Milwaukee, WI</span>
+        <span className="text-slate-500 font-medium">1565 W Greenfield Ave, Milwaukee,&nbsp;WI</span>
         <a
           href={`https://maps.google.com/?q=${encodeURIComponent(
             "1565 W Greenfield Ave, Milwaukee, WI 53204"

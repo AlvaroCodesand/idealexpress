@@ -84,7 +84,7 @@ export const QuickAgentMap: React.FC = () => {
                           Atención: {agent.contactName}
                         </span>
                       </div>
-                      <span className="px-2.5 py-1 rounded bg-[#F4EFE6] text-[#0E283F] font-mono text-xs font-bold uppercase shrink-0 border border-[#E8E1D5]">
+                      <span className="text-slate-500 font-mono text-xs font-bold uppercase shrink-0">
                         {agent.city}
                       </span>
                     </div>
@@ -93,7 +93,7 @@ export const QuickAgentMap: React.FC = () => {
                       <p className="flex items-start gap-2">
                         <MapPin size={14} className="text-[#3E5C10] shrink-0 mt-0.5" />
                         <span>
-                          {agent.address}, {agent.city}, {agent.state} {agent.zip}
+                          {agent.address}, {agent.city}, {agent.state}&nbsp;{agent.zip}
                         </span>
                       </p>
                       <p className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export const QuickAgentMap: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="text-xs font-mono font-bold text-slate-800 hover:text-[#0E283F] bg-[#FAF8F5] hover:bg-[#F4EFE6] px-3.5 py-1.5 rounded-lg border border-[#E8E1D5] transition shadow-2xs"
+                        className="text-xs font-mono font-bold text-[#0E283F] hover:text-[#3E5C10] transition inline-flex items-center gap-1 hover:underline"
                       >
                         Cómo llegar ↗
                       </a>
