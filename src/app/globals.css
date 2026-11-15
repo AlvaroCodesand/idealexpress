@@ -46,6 +46,42 @@ body {
   transform: rotate(-3deg);
 }
 
+/* Animaciones sutiles de velocidad y movimiento logístico */
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes truckGlide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 3s ease-in-out infinite;
+}
+
+.animate-truck-glide {
+  animation: truckGlide 2.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-subtle-float,
+  .animate-truck-glide,
+  .animate-pulse-glow {
+    animation: none !important;
+  }
+}
+
 /* Reglas de Impresión para Hojas Tamaño Carta */
 @media print {
   @page {

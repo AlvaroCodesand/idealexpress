@@ -1,108 +1,159 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin, FileCheck2, Truck, Home } from "lucide-react";
+import {
+  ArrowRight,
+  Package,
+  Store,
+  FileCheck2,
+  Truck,
+  Home,
+  CheckCircle2,
+  Clock,
+  ShieldCheck,
+} from "lucide-react";
 
 export const HowItWorks: React.FC = () => {
   const steps = [
     {
       num: "01",
-      icon: MapPin,
-      stage: "Tienda Local",
-      title: "Lleva tu caja",
-      desc: "Acude a la tienda hispana aliada más cercana en tu barrio con tus artículos empacados.",
-      image: "/images/step1-pack.jpg",
+      speedTag: "3 MINUTOS",
+      title: "Entrega en Tienda",
+      stage: "Recepción Rápida",
+      desc: "Llegas a la tienda hispana aliada más cercana en tu barrio y entregas tu paquete directamente en mostrador.",
+      icon: (
+        <div className="relative w-14 h-14 rounded-2xl bg-[#F4EFE6] text-[#0E283F] flex items-center justify-center group-hover:bg-[#0E283F] group-hover:text-white transition-colors duration-300">
+          <Store size={26} className="text-[#0E283F] group-hover:text-white transition-colors" />
+          <div className="absolute -top-1 -right-1 w-6 h-6 rounded-md bg-[#3E5C10] text-white flex items-center justify-center animate-subtle-float">
+            <Package size={13} />
+          </div>
+        </div>
+      ),
     },
     {
       num: "02",
-      icon: FileCheck2,
-      stage: "Registro Digital",
-      title: "Llenado de datos",
-      desc: "El encargado registra remitente y destinatario en el sistema y te entrega tu comprobante.",
-      image: "/images/step2-counter.jpg",
+      speedTag: "AL INSTANTE",
+      title: "Registro Digital",
+      stage: "Comprobante con Folio",
+      desc: "El encargado captura los datos en segundos y te entrega tu recibo oficial firmado con folio único de rastreo.",
+      icon: (
+        <div className="relative w-14 h-14 rounded-2xl bg-[#EBF3DC] text-[#3E5C10] flex items-center justify-center group-hover:bg-[#3E5C10] group-hover:text-white transition-colors duration-300">
+          <FileCheck2 size={26} className="text-[#3E5C10] group-hover:text-white transition-colors" />
+          <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#0E283F] text-white flex items-center justify-center">
+            <CheckCircle2 size={12} className="text-[#8FB838]" />
+          </div>
+        </div>
+      ),
     },
     {
       num: "03",
-      icon: Truck,
-      stage: "Consolidado & Cruce",
-      title: "Nosotros la llevamos",
-      desc: "Nuestros camiones llevan la carga a Texas para inspección aduanal legal sin riesgos.",
-      image: "/images/step3-truck.jpg",
+      speedTag: "SALIDA SEMANAL",
+      title: "Tránsito & Aduana",
+      stage: "Ruta Directa a Texas",
+      desc: "Nuestros camiones concentran la carga en Milwaukee y avanzan a Laredo para inspección aduanal legal sin demoras.",
+      icon: (
+        <div className="relative w-14 h-14 rounded-2xl bg-[#EBF3F7] text-[#183D61] flex items-center justify-center group-hover:bg-[#183D61] group-hover:text-white transition-colors duration-300 overflow-hidden">
+          <div className="animate-truck-glide">
+            <Truck size={28} className="text-[#183D61] group-hover:text-white transition-colors" />
+          </div>
+          <div className="absolute bottom-1.5 left-2 flex gap-0.5 opacity-60">
+            <span className="w-2 h-0.5 bg-[#8FB838] rounded-full"></span>
+            <span className="w-1 h-0.5 bg-[#8FB838] rounded-full"></span>
+          </div>
+        </div>
+      ),
     },
     {
       num: "04",
-      icon: Home,
-      stage: "Destino Final",
-      title: "Tu familia la recibe",
-      desc: "Entrega directa a domicilio en cualquier estado de México en un plazo de 2 a 3 semanas.",
-      image: "/images/step4-delivery.jpg",
+      speedTag: "2 A 3 SEMANAS",
+      title: "Entrega en Domicilio",
+      stage: "En Manos de tu Familia",
+      desc: "Tu destinatario recibe la caja directamente en la puerta de su casa en cualquier municipio de la República Mexicana.",
+      icon: (
+        <div className="relative w-14 h-14 rounded-2xl bg-white border border-[#E8E1D5] text-[#0E283F] flex items-center justify-center group-hover:border-[#3E5C10] transition-colors duration-300">
+          <Home size={26} className="text-[#0E283F] group-hover:scale-105 transition-transform" />
+          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#3E5C10] text-white flex items-center justify-center">
+            <ShieldCheck size={12} />
+          </div>
+        </div>
+      ),
     },
   ];
 
   return (
     <section className="py-20 sm:py-28 bg-white border-b border-[#E8E1D5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-        {/* Encabezado Espacioso */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        {/* Encabezado con Enfoque de Agilidad y Rapidez */}
+        <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF8F5] border border-[#E8E1D5] text-xs font-mono font-semibold text-[#0E283F] mb-1">
+            <Clock size={13} className="text-[#3E5C10]" />
+            <span>FLUJO ÁGIL Y RASTREABLE</span>
+          </div>
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
-            ¿Cómo viaja tu paquete a México?
+            De tu tienda en Wisconsin a la puerta de tu gente
           </h2>
-          <p className="text-base text-slate-700 leading-relaxed text-pretty">
-            Un proceso transparente en 4 etapas, desde el mostrador de tu barrio hasta la puerta de tu gente.
+          <p className="text-base text-slate-700 leading-relaxed text-pretty font-normal">
+            Un circuito logístico coordinado que ahorra tiempo en mostrador y garantiza el cruce ágil en frontera.
           </p>
         </div>
 
-        {/* 4 Pasos Espaciosos y Desahogados */}
+        {/* Ruta Conectada con Iconos en Movimiento Dinámico */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={step.num}
-                className="bg-[#FAF8F5] rounded-3xl border border-[#E8E1D5] overflow-hidden shadow-2xs hover:shadow-md transition-all group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative h-52 w-full bg-slate-900 overflow-hidden">
-                    <Image
-                      src={step.image}
-                      alt={step.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded-md bg-[#0E283F] text-white font-mono font-bold text-xs shadow-xs">
-                      Paso {step.num}
-                    </div>
-
-                    <div className="absolute bottom-3 right-3 text-white">
-                      <Icon size={20} className="text-[#8FB838]" />
-                    </div>
-                  </div>
-
-                  <div className="p-6 space-y-2.5">
-                    <span className="text-xs font-mono font-bold text-slate-500 block uppercase tracking-wider">
-                      {step.stage}
+          {steps.map((step) => (
+            <div
+              key={step.num}
+              className="bg-[#FAF8F5] rounded-3xl p-7 border border-[#E8E1D5] hover:border-[#0E283F] transition-all duration-300 group flex flex-col justify-between space-y-6 hover:shadow-xs"
+            >
+              <div className="space-y-5">
+                {/* Cabecera del paso con icono animado y badge de velocidad */}
+                <div className="flex items-center justify-between">
+                  {step.icon}
+                  <div className="text-right">
+                    <span className="font-mono font-bold text-xl text-slate-600 group-hover:text-[#0E283F] transition-colors block">
+                      {step.num}
                     </span>
-                    <h3 className="font-display font-bold text-xl text-[#0E283F]">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty">
-                      {step.desc}
-                    </p>
+                    <span className="inline-block text-[#3E5C10] font-mono font-bold text-xs uppercase tracking-wider">
+                      {step.speedTag}
+                    </span>
                   </div>
                 </div>
+
+                {/* Título y descripción ágil */}
+                <div className="space-y-1.5">
+                  <span className="text-xs font-mono font-semibold text-slate-500 block uppercase tracking-wider">
+                    {step.stage}
+                  </span>
+                  <h3 className="font-display font-bold text-xl text-[#0E283F] group-hover:text-[#183D61] transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-pretty font-normal">
+                    {step.desc}
+                  </p>
+                </div>
               </div>
-            );
-          })}
+
+              {/* Indicador de avance hacia el siguiente paso */}
+              <div className="pt-3 border-t border-[#E8E1D5] flex items-center justify-between text-xs font-mono text-slate-600 group-hover:text-[#0E283F] transition-colors">
+                <span>Paso {step.num} de 04</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform text-[#3E5C10]" />
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-14 text-center">
+        {/* Barra de Certidumbre y Velocidad */}
+        <div className="mt-14 p-6 rounded-2xl bg-[#FAF8F5] border border-[#E8E1D5] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+          <div className="flex items-center gap-3 text-slate-700">
+            <ShieldCheck size={20} className="text-[#3E5C10] shrink-0" />
+            <span>
+              <strong>Sin papeleos tardados:</strong> El llenado se hace en pantalla táctil en tienda y toma menos de 3 minutos.
+            </span>
+          </div>
+
           <Link
             href="/como-enviar"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-[#F4EFE6] text-[#0E283F] font-bold rounded-xl border border-[#E8E1D5] text-xs uppercase tracking-wider transition shadow-2xs hover:shadow-xs active:scale-95"
+            className="inline-flex items-center gap-1.5 font-bold text-[#0E283F] hover:text-[#3E5C10] transition shrink-0"
           >
-            <span>Conoce los artículos permitidos y reglas de aduana</span>
+            <span>Ver detalles de aduana y empaque</span>
             <ArrowRight size={15} className="text-[#3E5C10]" />
           </Link>
         </div>
