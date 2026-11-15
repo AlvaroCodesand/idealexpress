@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { checkChristmasArrival } from "@/utils/calendar";
 import { HolidayCheckResult } from "@/types";
 import { TARIFF_CONFIG } from "@/constants/config";
-import { Calendar, CheckCircle2, AlertTriangle, HelpCircle, MessageCircle } from "lucide-react";
+import { Calendar, CheckCircle2, AlertTriangle, HelpCircle, MessageCircle, Sparkles } from "lucide-react";
 
 export const DeliveryDateChecker: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>("2026-11-28");
@@ -22,17 +22,20 @@ export const DeliveryDateChecker: React.FC = () => {
   )}`;
 
   return (
-    <div className="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
-      <div className="space-y-1 pb-2 border-b border-stone-100">
-        <span className="text-[11px] font-black text-[#8FB838] uppercase tracking-widest block">
-          Herramienta Interactiva
-        </span>
-        <h3 className="text-xl font-black text-[#1E3A5F] flex items-center gap-2">
-          <Calendar size={22} className="text-[#8FB838]" />
+    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-6">
+      <div className="space-y-1.5 pb-3 border-b border-[#E8E1D5]">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-mono font-bold text-[#7BA029] uppercase tracking-widest block">
+            VERIFICADOR LOGÍSTICO
+          </span>
+          <span className="text-[10px] font-mono text-slate-400">NOCHEBUENA 2026</span>
+        </div>
+        <h3 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
+          <Calendar size={22} className="text-[#7BA029]" />
           <span>¿Llega a tiempo para Navidad?</span>
         </h3>
-        <p className="text-xs text-slate-500">
-          Elige la fecha en que piensas entregar tu caja en la tienda para verificar la entrega antes del 24 de Diciembre.
+        <p className="text-xs text-slate-600">
+          Elige la fecha en que llevarás tu caja al agente para corroborar si alcanza a llegar antes del 24 de diciembre.
         </p>
       </div>
 
@@ -41,17 +44,17 @@ export const DeliveryDateChecker: React.FC = () => {
           <label className="block text-xs font-bold text-slate-700 mb-1.5">
             Fecha estimada de entrega en tienda:
           </label>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="date"
               required
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="flex-1 px-4 py-2.5 text-xs sm:text-sm border border-stone-300 rounded-xl bg-stone-50 font-medium focus:ring-2 focus:ring-orange-500"
+              className="flex-1 px-4 py-3 text-xs sm:text-sm border border-[#E8E1D5] rounded-xl bg-[#FAF8F5] font-mono font-bold text-[#0E283F] focus:ring-2 focus:ring-[#0E283F]"
             />
             <button
               type="submit"
-              className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition active:scale-95 shrink-0"
+              className="px-6 py-3 bg-[#0E283F] hover:bg-[#183D61] text-white font-bold rounded-xl text-xs uppercase tracking-wider transition active:scale-95 shrink-0 shadow-2xs font-sans"
             >
               Revisar Fecha
             </button>
@@ -61,45 +64,45 @@ export const DeliveryDateChecker: React.FC = () => {
 
       {/* Estados del resultado según el Wireframe */}
       {result.status === "on-time" && (
-        <div className="bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-5 space-y-2 animate-in fade-in">
+        <div className="bg-[#EBF3DC] border-2 border-[#7BA029] rounded-2xl p-5 space-y-2 animate-in fade-in">
           <div className="flex items-center justify-between">
-            <span className="px-3 py-1 bg-emerald-600 text-white rounded-md text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5">
-              <CheckCircle2 size={14} />
+            <span className="px-3 py-1 bg-[#7BA029] text-white rounded-md text-[10px] font-mono font-black uppercase tracking-wider flex items-center gap-1.5 shadow-2xs">
+              <CheckCircle2 size={13} />
               A TIEMPO PARA NAVIDAD
             </span>
-            <span className="text-xs font-bold text-emerald-800">Garantía Confirmada</span>
+            <span className="text-xs font-mono font-bold text-[#2D450D]">Garantía Confirmada</span>
           </div>
-          <p className="text-sm font-bold text-emerald-950 mt-1">{result.message}</p>
-          <p className="text-xs text-emerald-800 leading-relaxed">{result.subMessage}</p>
+          <p className="font-serif text-base font-bold text-[#2D450D] mt-1">{result.message}</p>
+          <p className="text-xs text-[#2D450D]/80 leading-relaxed font-sans">{result.subMessage}</p>
         </div>
       )}
 
       {result.status === "late" && (
         <div className="bg-amber-50 border-2 border-amber-400 rounded-2xl p-5 space-y-3 animate-in fade-in">
           <div className="flex items-center justify-between">
-            <span className="px-3 py-1 bg-amber-600 text-white rounded-md text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5">
-              <AlertTriangle size={14} />
-              NO ALCANZA GARANTÍA
+            <span className="px-3 py-1 bg-amber-600 text-white rounded-md text-[10px] font-mono font-black uppercase tracking-wider flex items-center gap-1.5">
+              <AlertTriangle size={13} />
+              SUPERA LA FECHA LÍMITE
             </span>
-            <span className="text-xs font-bold text-amber-800">Tránsito Regular</span>
+            <span className="text-xs font-mono font-bold text-amber-800">Tránsito Regular</span>
           </div>
-          <p className="text-sm font-bold text-amber-950 mt-1">{result.message}</p>
-          <p className="text-xs text-amber-800 leading-relaxed">{result.subMessage}</p>
+          <p className="font-serif text-base font-bold text-amber-950 mt-1">{result.message}</p>
+          <p className="text-xs text-amber-900 leading-relaxed font-sans">{result.subMessage}</p>
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition"
           >
-            <MessageCircle size={16} />
+            <MessageCircle size={15} />
             <span>Consultar Opciones por WhatsApp</span>
           </a>
         </div>
       )}
 
       {result.status === "unselected" && (
-        <div className="bg-stone-50 border border-stone-200 rounded-2xl p-5 text-center text-xs text-slate-500">
-          <HelpCircle size={24} className="mx-auto text-slate-400 mb-1" />
+        <div className="bg-[#FAF8F5] border border-[#E8E1D5] rounded-2xl p-5 text-center text-xs text-slate-500">
+          <HelpCircle size={22} className="mx-auto text-slate-400 mb-1" />
           <p>{result.message}</p>
         </div>
       )}

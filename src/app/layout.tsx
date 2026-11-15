@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Libre_Baskerville, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SeasonAlert } from "@/components/layout/SeasonAlert";
 import { Navbar } from "@/components/layout/Navbar";
@@ -8,14 +8,25 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { LocalBusinessJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontSans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fontSerif = Libre_Baskerville({
+  variable: "--font-serif",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const fontMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -98,13 +109,13 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} h-full antialiased`}
     >
       <head>
         <LocalBusinessJsonLd />
         <FaqJsonLd />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans">
+      <body className="min-h-full flex flex-col bg-[#FAF8F5] text-[#0A1928] font-sans selection:bg-[#7BA029] selection:text-white">
         <SeasonAlert />
         <Suspense fallback={null}>
           <Navbar />

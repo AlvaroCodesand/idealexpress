@@ -9,186 +9,199 @@ import {
   Clock,
   ShieldCheck,
   Info,
+  Package,
+  Sparkles,
+  Check,
 } from "lucide-react";
 
 export default function TarifasClient() {
-  const [weight, setWeight] = useState<number>(30);
+  const [weight, setWeight] = useState<number>(45);
   const [boxSize, setBoxSize] = useState<string>("18x18x18");
   const [withInsurance, setWithInsurance] = useState<boolean>(false);
-  const [declaredValue, setDeclaredValue] = useState<number>(150);
+  const [declaredValue, setDeclaredValue] = useState<number>(200);
 
   const pricing = calculateShipmentCost(weight, withInsurance, declaredValue);
 
+  const quickPresets = [
+    { label: "Caja Ropa Ligera", weight: 25, size: "16x16x16", note: "Prendas y calzado" },
+    { label: "Familiar Estándar", weight: 45, size: "18x18x18", note: "La más enviada" },
+    { label: "Encomienda Navideña", weight: 75, size: "20x20x20", note: "Juguetes y regalos" },
+    { label: "Caja Grande Máxima", weight: 110, size: "24x24x24", note: "Cobijas y despensa" },
+  ];
+
   const waQuoteText = encodeURIComponent(
-    `Hola Ideal Express, coticé en su sitio web:\n- Peso: ${weight} lbs (Mínimo facturado: ${pricing.billableWeightLbs} lbs)\n- Medida: ${boxSize}\n- Seguro: ${
-      withInsurance ? `Sí ($${declaredValue} USD declarado)` : "No"
-    }\n- Total estimado: $${pricing.totalUSD} USD\n¿En qué tienda puedo entregar mi caja?`
+    `Hola Ideal Express, coticé en su mostrador virtual:\n- Peso: ${weight} lbs (Facturable: ${pricing.billableWeightLbs} lbs)\n- Medida: ${boxSize}\n- Seguro: ${
+      withInsurance ? `Sí (Valor declarado $${declaredValue} USD)` : "No"
+    }\n- Total estimado: $${pricing.totalUSD} USD\n¿Me confirman qué tienda me queda más cerca para entregar?`
   );
 
   const waUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=${waQuoteText}`;
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-14">
-      {/* 1. HEADER */}
+      {/* 1. HEADER EDITORIAL */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
-        <span className="text-[#8FB838] text-xs font-black uppercase tracking-widest">
-          Transparencia y Claridad
+        <span className="text-[#7BA029] font-mono text-xs font-bold uppercase tracking-widest block">
+          LISTA DE PRECIOS OFICIAL
         </span>
-        <h1 className="text-3xl sm:text-4xl font-black text-[#1E3A5F] tracking-tight">
-          3. Servicios y Tarifas
+        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0E283F] tracking-tight">
+          Tarifas Claras y Mostrador Virtual
         </h1>
         <p className="text-sm text-slate-600">
-          Precio claro y sin sorpresas. Facturamos por peso real con entrega puerta a puerta en México.
+          Facturación en báscula al momento de entregar tu caja. Sin cobros ocultos ni aranceles en México.
         </p>
       </div>
 
-      {/* 2. NIVELES DE SERVICIO EN 3 TARJETAS (DEL WIREFRAME PC 3) */}
+      {/* 2. NIVELES DE SERVICIO EN 3 FICHAS POSTALES */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Nivel 1 */}
-        <div className="bg-white rounded-2xl p-6 border-2 border-[#1E3A5F] shadow-sm relative space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="px-2.5 py-1 bg-[#E5F2D6] text-[#2D450D] font-bold text-[10px] uppercase rounded border border-[#CDE5B3]">
-              Servicio Estándar
-            </span>
-            <span className="text-xs font-bold text-[#8FB838]">Más Popular</span>
+        <div className="bg-white rounded-2xl p-6 border-2 border-[#0E283F] shadow-sm relative space-y-3 flex flex-col justify-between">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="px-2.5 py-1 bg-[#F4EFE6] text-[#0E283F] font-mono font-bold text-[10px] uppercase rounded border border-[#E8E1D5]">
+                SERVICIO ESTÁNDAR
+              </span>
+              <span className="text-xs font-mono font-bold text-[#7BA029] flex items-center gap-1">
+                <Sparkles size={13} /> Recomendado
+              </span>
+            </div>
+            <h2 className="font-serif text-xl font-bold text-[#0E283F]">
+              Servicio Regular México
+            </h2>
+            <div className="space-y-0.5">
+              <div className="flex items-baseline gap-1 font-mono">
+                <span className="text-3xl font-black text-[#0E283F]">
+                  ${TARIFF_CONFIG.pricePerPound}
+                </span>
+                <span className="text-xs text-slate-500 font-bold uppercase">USD / libra</span>
+              </div>
+              <span className="text-xs text-slate-500 block">
+                Mínimo {TARIFF_CONFIG.minPounds} lbs (${TARIFF_CONFIG.minPriceUSD} USD)
+              </span>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+              Entrega directa a domicilio en cualquier estado y municipio de la República Mexicana.
+            </p>
           </div>
-          <h2 className="text-xl font-black text-[#1E3A5F]">Servicio Regular México</h2>
-          <div className="space-y-0.5">
-            <span className="text-3xl font-black text-slate-900">
-              US${TARIFF_CONFIG.pricePerPound}
-            </span>
-            <span className="text-xs text-slate-500 block font-medium">
-              por libra · mínimo {TARIFF_CONFIG.minPounds} libras (${TARIFF_CONFIG.minPriceUSD} USD)
-            </span>
-          </div>
-          <p className="text-xs text-slate-600 leading-relaxed border-t border-stone-100 pt-3">
-            Entrega a domicilio en cualquier estado y municipio de la República Mexicana.
-          </p>
-          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
-            <Clock size={14} className="text-[#8FB838]" />
-            <span>Tiempo estimado: 2 a 3 semanas</span>
+          <div className="pt-2 flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-700 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#E8E1D5]">
+            <Clock size={13} className="text-[#7BA029]" />
+            <span>Tránsito: 2 a 3 semanas</span>
           </div>
         </div>
 
         {/* Nivel 2 */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="px-2.5 py-1 bg-slate-100 text-slate-700 font-bold text-[10px] uppercase rounded">
-              Servicio Prioritario
-            </span>
+        <div className="bg-white rounded-2xl p-6 border border-[#E8E1D5] shadow-2xs space-y-3 flex flex-col justify-between">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="px-2.5 py-1 bg-slate-100 text-slate-600 font-mono font-bold text-[10px] uppercase rounded">
+                PRIORITARIO
+              </span>
+            </div>
+            <h2 className="font-serif text-xl font-bold text-[#0E283F]">
+              Servicio Plus Bajío / Centro
+            </h2>
+            <div className="space-y-0.5">
+              <div className="flex items-baseline gap-1 font-mono">
+                <span className="text-3xl font-black text-[#0E283F]">
+                  $3.49
+                </span>
+                <span className="text-xs text-slate-500 font-bold uppercase">USD / libra</span>
+              </div>
+              <span className="text-xs text-slate-500 block">
+                Despacho acelerado con conexión inmediata
+              </span>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+              Guanajuato, Michoacán, Jalisco, Estado de México, CDMX, Puebla y Querétaro.
+            </p>
           </div>
-          <h2 className="text-xl font-black text-[#1E3A5F]">Servicio Plus Bajío / Centro</h2>
-          <div className="space-y-0.5">
-            <span className="text-3xl font-black text-slate-900">US$3.49</span>
-            <span className="text-xs text-slate-500 block font-medium">
-              por libra · despacho acelerado en Laredo
-            </span>
-          </div>
-          <p className="text-xs text-slate-600 leading-relaxed border-t border-stone-100 pt-3">
-            Ruta prioritaria con conexión exprés para Guanajuato, Michoacán, Jalisco, Edo. Méx y CDMX.
-          </p>
-          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
-            <Clock size={14} className="text-[#8FB838]" />
-            <span>Tiempo estimado: 10 a 14 días</span>
+          <div className="pt-2 flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-700 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#E8E1D5]">
+            <Clock size={13} className="text-[#7BA029]" />
+            <span>Tránsito: 10 a 14 días</span>
           </div>
         </div>
 
         {/* Nivel 3 */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="px-2.5 py-1 bg-slate-100 text-slate-700 font-bold text-[10px] uppercase rounded">
-              Servicio Fronterizo
-            </span>
+        <div className="bg-white rounded-2xl p-6 border border-[#E8E1D5] shadow-2xs space-y-3 flex flex-col justify-between">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="px-2.5 py-1 bg-slate-100 text-slate-600 font-mono font-bold text-[10px] uppercase rounded">
+                FRONTERIZO
+              </span>
+            </div>
+            <h2 className="font-serif text-xl font-bold text-[#0E283F]">
+              Servicio Frontera Norte
+            </h2>
+            <div className="space-y-0.5">
+              <div className="flex items-baseline gap-1 font-mono">
+                <span className="text-3xl font-black text-[#0E283F]">
+                  $2.79
+                </span>
+                <span className="text-xs text-slate-500 font-bold uppercase">USD / libra</span>
+              </div>
+              <span className="text-xs text-slate-500 block">
+                Ruta directa interestatal hacia el norte
+              </span>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+              Nuevo León (Monterrey y área metropolitana), Coahuila y Tamaulipas.
+            </p>
           </div>
-          <h2 className="text-xl font-black text-[#1E3A5F]">Servicio Frontera Norte</h2>
-          <div className="space-y-0.5">
-            <span className="text-3xl font-black text-slate-900">US$2.79</span>
-            <span className="text-xs text-slate-500 block font-medium">
-              por libra · entrega rápida en estados limítrofes
-            </span>
-          </div>
-          <p className="text-xs text-slate-600 leading-relaxed border-t border-stone-100 pt-3">
-            Ruta directa para Nuevo León (Monterrey), Coahuila y Tamaulipas.
-          </p>
-          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
-            <Clock size={14} className="text-[#8FB838]" />
-            <span>Tiempo estimado: 7 a 10 días</span>
+          <div className="pt-2 flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-700 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#E8E1D5]">
+            <Clock size={13} className="text-[#7BA029]" />
+            <span>Tránsito: 7 a 10 días</span>
           </div>
         </div>
       </div>
 
-      {/* 3. PESO, MEDIDAS Y CALCULADORA (PC 3 A 2 COLUMNAS) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Columna Izquierda: Tabla de Peso, Medidas y Seguro */}
-        <div className="lg:col-span-6 space-y-6">
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
-            <h3 className="text-lg font-black text-[#1E3A5F] border-b border-stone-100 pb-3">
-              Peso y Medidas Permitidas
-            </h3>
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="bg-slate-100 text-slate-700 uppercase text-[10px] tracking-wider">
-                  <th className="py-2.5 px-3">Concepto</th>
-                  <th className="py-2.5 px-3">Especificación Oficial</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                <tr>
-                  <td className="py-3 px-3 font-bold text-slate-900">Peso por caja</td>
-                  <td className="py-3 px-3 text-slate-700">
-                    30 a 140 libras (mínimo cobrable 15 lbs)
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-3 font-bold text-slate-900">Medidas estándar</td>
-                  <td className="py-3 px-3 text-slate-700">
-                    16x16x16&quot;, 18x18x18&quot;, 20x20x20&quot;, 24x24x24&quot;
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-3 font-bold text-slate-900">Tipo de embalaje</td>
-                  <td className="py-3 px-3 text-slate-700">
-                    Cartón corrugado de doble pared, sellado con cinta canela
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-3 font-bold text-slate-900">Póliza de seguro</td>
-                  <td className="py-3 px-3 text-slate-700">
-                    10% del valor declarado (mínimo $5 USD hasta $2,000 USD)
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-3">
-            <div className="flex items-center gap-2 font-bold text-slate-800 text-xs">
-              <ShieldCheck size={18} className="text-[#8FB838]" />
-              <span>Regla Vigente de Seguro:</span>
+      {/* 3. MOSTRADOR DE PESAJE VIRTUAL (SIMULADOR DE BÁSCULA) */}
+      <div className="bg-white rounded-3xl border border-[#E8E1D5] p-6 sm:p-10 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Lado izquierdo: Parámetros y Presets */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="border-b border-[#E8E1D5] pb-4">
+              <span className="text-[10px] font-mono font-bold text-[#7BA029] uppercase tracking-wider block">
+                SIMULADOR DE PESAJE EN TIENDA
+              </span>
+              <h3 className="font-serif text-2xl font-bold text-[#0E283F]">
+                Calcula tu caja antes de acudir
+              </h3>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Toda caja cuenta con cobertura básica de flete. Para artículos de especial aprecio o valor elevado, el seguro opcional del 10% cubre reposición económica en caso de siniestro durante el trayecto.
-            </p>
-          </div>
-        </div>
 
-        {/* Columna Derecha: Calculadora Interactiva */}
-        <div className="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-md space-y-6">
-          <div className="flex items-center gap-3 pb-3 border-b border-stone-100">
-            <div className="w-10 h-10 rounded-xl bg-[#EBF3F7] text-[#1E3A5F] flex items-center justify-center">
-              <Calculator size={22} />
+            {/* Presets Rápidos de Cajas Típicas */}
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-slate-700">
+                Selección rápida por tipo de caja:
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {quickPresets.map((preset) => (
+                  <button
+                    key={preset.label}
+                    type="button"
+                    onClick={() => {
+                      setWeight(preset.weight);
+                      setBoxSize(preset.size);
+                    }}
+                    className={`p-2.5 rounded-xl border text-left transition ${
+                      weight === preset.weight
+                        ? "bg-[#0E283F] text-white border-[#0E283F] shadow-xs"
+                        : "bg-[#FAF8F5] hover:bg-[#F4EFE6] text-slate-800 border-[#E8E1D5]"
+                    }`}
+                  >
+                    <span className="block text-[11px] font-bold leading-tight">{preset.label}</span>
+                    <span className="block text-[10px] font-mono opacity-80 mt-1">
+                      {preset.weight} lbs ({preset.size}&quot;)
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
-            <div>
-              <h3 className="font-bold text-base text-slate-900">Calculadora de Cotización</h3>
-              <p className="text-xs text-slate-500">Calcula tu costo aproximado antes de ir a la tienda</p>
-            </div>
-          </div>
 
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                <span>Peso estimado (libras):</span>
-                <span className="text-[#1E3A5F] font-black text-sm">{weight} lbs</span>
+            {/* Selector de Peso Manual */}
+            <div className="space-y-2 pt-2">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-700">
+                <span>Peso en báscula:</span>
+                <span className="text-xl font-mono font-black text-[#0E283F]">{weight} lbs</span>
               </div>
               <input
                 type="range"
@@ -197,34 +210,35 @@ export default function TarifasClient() {
                 step="1"
                 value={weight}
                 onChange={(e) => setWeight(Number(e.target.value))}
-                className="w-full accent-[#1E3A5F] cursor-pointer"
+                className="w-full accent-[#0E283F] cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5">
+              <div className="flex justify-between text-[10px] font-mono text-slate-400">
                 <span>Mín. 15 lbs</span>
-                <span>50 lbs</span>
-                <span>100 lbs</span>
+                <span>45 lbs (Promedio)</span>
+                <span>80 lbs</span>
                 <span>Máx. 140 lbs</span>
               </div>
               {pricing.isMinimumApplied && (
-                <p className="text-[11px] text-amber-800 bg-amber-50 p-2 rounded-lg mt-2 flex items-center gap-1.5 border border-amber-200">
-                  <Info size={13} className="shrink-0" />
-                  Cajas menores a 15 lbs se cobran a la tarifa mínima de ${TARIFF_CONFIG.minPriceUSD} USD.
+                <p className="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-center gap-2">
+                  <Info size={14} className="shrink-0" />
+                  Cajas menores a 15 lbs se cobran a la tarifa mínima base de ${TARIFF_CONFIG.minPriceUSD} USD.
                 </p>
               )}
             </div>
 
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Medida de la caja:</label>
-              <div className="grid grid-cols-4 gap-2">
+            {/* Medida de caja */}
+            <div className="space-y-2 pt-2">
+              <label className="block text-xs font-bold text-slate-700">Medida de la caja (pulgadas):</label>
+              <div className="grid grid-cols-4 gap-2 font-mono text-xs font-bold">
                 {["16x16x16", "18x18x18", "20x20x20", "24x24x24"].map((sz) => (
                   <button
                     key={sz}
                     type="button"
                     onClick={() => setBoxSize(sz)}
-                    className={`py-2 text-xs font-bold rounded-lg border transition ${
+                    className={`py-2 rounded-lg border transition ${
                       boxSize === sz
-                        ? "bg-[#1E3A5F] text-white border-[#1E3A5F]"
-                        : "bg-stone-50 text-slate-700 border-stone-200 hover:bg-stone-100"
+                        ? "bg-[#0E283F] text-white border-[#0E283F]"
+                        : "bg-[#FAF8F5] text-slate-700 border-[#E8E1D5] hover:bg-[#F4EFE6]"
                     }`}
                   >
                     {sz}&quot;
@@ -233,56 +247,101 @@ export default function TarifasClient() {
               </div>
             </div>
 
-            <div className="pt-2 border-t border-stone-100">
-              <label className="flex items-center gap-2 cursor-pointer">
+            {/* Seguro Opcional */}
+            <div className="pt-2 border-t border-[#E8E1D5]">
+              <label className="flex items-center gap-2.5 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={withInsurance}
                   onChange={(e) => setWithInsurance(e.target.checked)}
-                  className="w-4 h-4 text-[#8FB838] rounded accent-[#8FB838]"
+                  className="w-4 h-4 text-[#7BA029] rounded accent-[#7BA029]"
                 />
                 <span className="text-xs font-bold text-slate-800">
-                  Agregar seguro de valor declarado (10%)
+                  Agregar seguro de valor declarado (10% sobre mercancía)
                 </span>
               </label>
 
               {withInsurance && (
-                <div className="mt-2 pl-6 flex items-center gap-3">
-                  <span className="text-xs text-slate-600">Valor declarado:</span>
-                  <input
-                    type="number"
-                    min="50"
-                    max={TARIFF_CONFIG.maxDeclaredValueUSD}
-                    value={declaredValue}
-                    onChange={(e) => setDeclaredValue(Number(e.target.value))}
-                    className="w-28 px-3 py-1 text-xs font-bold border border-stone-300 rounded-lg"
-                  />
-                  <span className="text-xs text-slate-500">
-                    Póliza: ${pricing.insuranceCostUSD} USD
-                  </span>
+                <div className="mt-3 pl-6 flex items-center gap-3 text-xs">
+                  <span className="text-slate-600 font-medium">Valor declarado:</span>
+                  <div className="flex items-center gap-1 font-mono">
+                    <span className="font-bold">$</span>
+                    <input
+                      type="number"
+                      min="50"
+                      max={TARIFF_CONFIG.maxDeclaredValueUSD}
+                      value={declaredValue}
+                      onChange={(e) => setDeclaredValue(Number(e.target.value))}
+                      className="w-28 px-3 py-1 font-bold border border-slate-300 rounded-lg text-slate-900 bg-white"
+                    />
+                    <span className="text-slate-500 ml-2">Póliza: ${pricing.insuranceCostUSD} USD</span>
+                  </div>
                 </div>
               )}
             </div>
+          </div>
 
-            {/* Total */}
-            <div className="bg-slate-100 p-4 rounded-xl flex items-center justify-between text-slate-900 border border-slate-200">
-              <div>
-                <span className="text-[11px] text-slate-500 block uppercase font-bold">
-                  Total Estimado:
+          {/* Lado derecho: Ticket de Cobro Postal Estilizado */}
+          <div className="lg:col-span-5 bg-[#0E283F] text-white p-7 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between border border-[#183D61]">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center border-b border-white/10 pb-3">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#8FB838]">
+                  DESGLOSE ESTIMADO
                 </span>
-                <span className="text-2xl font-black text-[#1E3A5F]">
-                  ${pricing.totalUSD.toFixed(2)} USD
+                <span className="text-[10px] font-mono text-slate-400">TICKET VIRTUAL</span>
+              </div>
+
+              <div className="space-y-2.5 font-mono text-xs">
+                <div className="flex justify-between text-slate-300">
+                  <span>Tarifa estándar:</span>
+                  <span className="text-white">${TARIFF_CONFIG.pricePerPound} USD / lb</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Peso a facturar:</span>
+                  <span className="text-white">{pricing.billableWeightLbs} lbs</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Medida seleccionada:</span>
+                  <span className="text-white">{boxSize}&quot;</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Flete base:</span>
+                  <span className="text-white">${pricing.shippingCostUSD.toFixed(2)} USD</span>
+                </div>
+                {withInsurance && (
+                  <div className="flex justify-between text-[#8FB838] pt-1">
+                    <span>Seguro (10% s/${declaredValue}):</span>
+                    <span>+${pricing.insuranceCostUSD.toFixed(2)} USD</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="border-t border-dashed border-white/20 pt-4 flex items-baseline justify-between">
+                <div>
+                  <span className="text-[11px] font-mono uppercase font-bold text-slate-400 block">
+                    TOTAL ESTIMADO EN TIENDA:
+                  </span>
+                  <span className="text-xs text-[#8FB838]">Pago en mostrador al entregar</span>
+                </div>
+                <span className="text-3xl font-mono font-black text-white tracking-tight">
+                  ${pricing.totalUSD.toFixed(2)} <span className="text-sm font-sans font-normal text-slate-300">USD</span>
                 </span>
               </div>
+            </div>
+
+            <div className="space-y-3 pt-2">
               <a
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition shadow-sm active:scale-95"
+                className="w-full flex items-center justify-center gap-2 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs sm:text-sm tracking-wide transition shadow-md active:scale-95"
               >
-                <MessageCircle size={16} />
-                <span>Cotizar por WhatsApp</span>
+                <MessageCircle size={18} />
+                <span>Enviar Esta Cotización a WhatsApp</span>
               </a>
+              <p className="text-[10px] text-center text-slate-400">
+                * El peso final se verifica en la báscula de la tienda receptora.
+              </p>
             </div>
           </div>
         </div>

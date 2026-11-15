@@ -3,118 +3,128 @@ import Image from "next/image";
 import Link from "next/link";
 import { TARIFF_CONFIG } from "@/constants/config";
 import { Accordion } from "@/components/common/Accordion";
-import { ShieldCheck, Award, ArrowRight } from "lucide-react";
+import { ShieldCheck, Award, ArrowRight, Check } from "lucide-react";
 
 export const TrustAndFaqRow: React.FC = () => {
   const faqItems = [
     {
       id: "faq-1",
-      title: "¿Cuánto tarda mi envío?",
+      title: "¿Cuánto tarda mi envío en llegar?",
       content:
-        "El tiempo habitual es de 2 a 3 semanas. Contamos con transporte consolidado desde Milwaukee a Laredo y entrega directa a domicilio con paqueterías líderes en México.",
+        "El tiempo habitual es de 2 a 3 semanas. Contamos con transporte consolidado desde Milwaukee a Laredo y entrega directa a domicilio con Estafeta, FedEx y Paquetexpress en México.",
     },
     {
       id: "faq-2",
-      title: "¿Qué puedo enviar?",
+      title: "¿Qué puedo enviar en mi caja?",
       content:
-        "Puedes enviar ropa, calzado, cobijas, juguetes, despensa seca y artículos de uso personal o del hogar. No se permiten armas, medicamentos controlados ni dinero en efectivo.",
+        "Ropa, calzado, cobijas, juguetes, despensa seca y artículos de uso personal o del hogar. No se permiten armas, medicamentos controlados ni dinero en efectivo.",
     },
     {
       id: "faq-3",
-      title: "¿Cuánto cuesta enviar?",
+      title: "¿Cómo se calcula el precio?",
       content:
-        `La tarifa estándar es de $${TARIFF_CONFIG.pricePerPound} USD por libra, con un mínimo cobrable de 15 libras ($${TARIFF_CONFIG.minPriceUSD} USD).`,
+        `La tarifa fija es de $${TARIFF_CONFIG.pricePerPound} USD por libra en báscula, con un mínimo facturable de 15 libras ($${TARIFF_CONFIG.minPriceUSD} USD).`,
     },
   ];
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
-      {/* 3 Columnas idénticas al Wireframe PC 1 */}
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-        {/* Columna 1: 5. Confianza */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
+        {/* Columna 1: Confianza (Estilo Postal / Editorial) */}
+        <div className="bg-white rounded-2xl p-6 border border-[#E8E1D5] shadow-xs space-y-4">
           <div className="space-y-1">
-            <span className="text-[11px] font-black text-[#8FB838] uppercase tracking-widest block">
-              Trayectoria
+            <span className="text-[11px] font-mono font-bold text-[#7BA029] uppercase tracking-widest block">
+              RESPALDO COMUNITARIO
             </span>
-            <h3 className="text-xl font-black text-[#1E3A5F]">5. Confianza</h3>
-            <p className="text-xs font-semibold text-slate-700">
-              Más de 10 años enviando · Empresa 100% familiar · Bodega matriz propia
+            <h3 className="font-serif text-2xl font-bold text-[#0E283F]">
+              Trato de Familia a Familia
+            </h3>
+            <p className="text-xs text-slate-600">
+              Más de 10 años en Milwaukee · Empresa 100% familiar · Bodega matriz propia.
             </p>
           </div>
 
-          <div className="relative h-44 w-full rounded-xl overflow-hidden shadow-inner bg-slate-100">
+          <div className="relative h-48 w-full rounded-xl overflow-hidden shadow-inner bg-slate-900">
             <Image
               src="/images/family-trust.jpg"
-              alt="Familia hispana recibiendo apoyo de Ideal Express"
+              alt="Familia hispana enviando con Ideal Express"
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0F2438]/70 to-transparent"></div>
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-[11px] text-white font-medium">
-              Cuidamos cada caja como si fuera para nuestra propia familia.
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0E283F]/80 via-transparent to-transparent"></div>
+            <div className="absolute bottom-3 left-3 right-3 text-xs text-white font-medium">
+              «Sabemos el esfuerzo que hay detrás de cada paquete».
             </div>
           </div>
 
-          <div className="space-y-2 pt-1 text-xs text-slate-600">
+          <div className="space-y-2 pt-1 text-xs text-slate-700">
             <div className="flex items-center gap-2">
-              <ShieldCheck size={16} className="text-[#8FB838] shrink-0" />
+              <ShieldCheck size={16} className="text-[#7BA029] shrink-0" />
               <span>Cruce legal con manifiesto aduanal</span>
             </div>
             <div className="flex items-center gap-2">
-              <Award size={16} className="text-[#1E3A5F] shrink-0" />
-              <span>Garantía de entrega a domicilio</span>
+              <Award size={16} className="text-[#183D61] shrink-0" />
+              <span>Garantía de entrega puerta a puerta</span>
             </div>
           </div>
         </div>
 
-        {/* Columna 2: 6. Tarifa Resumida */}
-        <div className="bg-gradient-to-br from-[#1E3A5F] to-[#0F2438] text-white rounded-2xl p-6 shadow-md space-y-5">
-          <div className="space-y-1">
-            <span className="text-[11px] font-black text-[#8FB838] uppercase tracking-widest block">
-              Precio Claro
-            </span>
-            <h3 className="text-xl font-black text-white">6. Tarifa Resumida</h3>
+        {/* Columna 2: Ficha Postal de Tarifa (Ticket de Embarque) */}
+        <div className="bg-[#0E283F] text-white rounded-2xl p-6 sm:p-7 shadow-md relative overflow-hidden flex flex-col justify-between space-y-6">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-mono font-bold text-[#8FB838] uppercase tracking-widest">
+                TARIFA FIJA 2026
+              </span>
+              <span className="text-[10px] font-mono text-slate-400">ID: IE-RATE</span>
+            </div>
+            <h3 className="font-serif text-2xl font-bold text-white">
+              Costo Claro por Libra
+            </h3>
             <p className="text-xs text-slate-300">
-              Tarifa única sin cobros sorpresa en destino.
+              Sin cobros sorpresa ni impuestos adicionales al entregar en México.
             </p>
           </div>
 
-          <div className="bg-white/10 p-5 rounded-xl border border-white/15 space-y-3">
+          {/* Tarjeta interior tipo ticket kraft */}
+          <div className="bg-[#183D61]/60 p-5 rounded-xl border border-white/10 space-y-3 font-mono">
             <div className="text-center">
-              <span className="text-3xl font-black text-white">
-                US${TARIFF_CONFIG.pricePerPound}
+              <span className="text-4xl font-black text-white tracking-tight">
+                ${TARIFF_CONFIG.pricePerPound}
               </span>
-              <span className="text-sm font-semibold text-[#8FB838] block mt-0.5">
-                por libra
+              <span className="text-xs text-[#8FB838] block mt-0.5 uppercase tracking-wider font-bold">
+                USD por libra
               </span>
             </div>
             <div className="border-t border-white/10 pt-3 text-center text-xs text-slate-300">
-              Mínimo cobrable: <strong>{TARIFF_CONFIG.minPounds} libras</strong> (${TARIFF_CONFIG.minPriceUSD} USD)
+              Mínimo: <strong>{TARIFF_CONFIG.minPounds} lbs</strong> (${TARIFF_CONFIG.minPriceUSD} USD)
             </div>
           </div>
 
-          <p className="text-[11px] text-slate-300 leading-normal">
-            Aceptamos cajas de 30 a 140 libras para fácil manejo y protección de tus artículos.
-          </p>
-
-          <Link
-            href="/tarifas"
-            className="block w-full py-3 text-center bg-white hover:bg-slate-100 text-[#1E3A5F] font-black rounded-xl text-xs uppercase tracking-wider transition shadow-sm"
-          >
-            Ver todas las tarifas y medidas →
-          </Link>
+          <div className="space-y-3">
+            <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+              Aceptamos cajas de 30 a 140 libras para fácil manejo y protección del contenido.
+            </p>
+            <Link
+              href="/tarifas"
+              className="block w-full py-3 text-center bg-white hover:bg-[#FAF8F5] text-[#0E283F] font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-sm font-sans"
+            >
+              Ver medidas y calculadora →
+            </Link>
+          </div>
         </div>
 
-        {/* Columna 3: 7. Preguntas Frecuentes */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
+        {/* Columna 3: Preguntas Frecuentes */}
+        <div className="bg-white rounded-2xl p-6 border border-[#E8E1D5] shadow-xs space-y-4">
           <div className="space-y-1">
-            <span className="text-[11px] font-black text-[#8FB838] uppercase tracking-widest block">
-              Respuestas Rápidas
+            <span className="text-[11px] font-mono font-bold text-[#7BA029] uppercase tracking-widest block">
+              DUDAS HABITUALES
             </span>
-            <h3 className="text-xl font-black text-[#1E3A5F]">7. Preguntas frecuentes</h3>
+            <h3 className="font-serif text-2xl font-bold text-[#0E283F]">
+              Preguntas Frecuentes
+            </h3>
             <p className="text-xs text-slate-500">
-              Lo que más nos preguntan nuestros clientes en tienda:
+              Lo que más nos consultan nuestros clientes en tienda:
             </p>
           </div>
 
@@ -122,10 +132,10 @@ export const TrustAndFaqRow: React.FC = () => {
 
           <Link
             href="/como-enviar"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1E3A5F] hover:text-[#8FB838] pt-1"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0E283F] hover:text-[#7BA029] pt-2 transition"
           >
-            <span>Ver guía paso a paso y regulaciones</span>
-            <ArrowRight size={14} />
+            <span>Ver guía completa de regulaciones</span>
+            <ArrowRight size={13} className="text-[#7BA029]" />
           </Link>
         </div>
       </div>

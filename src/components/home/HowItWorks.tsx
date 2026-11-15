@@ -1,88 +1,124 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin, FileCheck2, Truck, Home } from "lucide-react";
 
 export const HowItWorks: React.FC = () => {
   const steps = [
     {
-      num: 1,
+      num: "01",
+      icon: MapPin,
+      stage: "TIENDA LOCAL",
       title: "Lleva tu caja",
-      desc: "Al agente o tienda hispana más cercana a ti en tu barrio.",
+      desc: "Acude al comercio hispano aliado más cercano en tu barrio.",
       image: "/images/step1-pack.jpg",
-      alt: "Persona empacando caja de cartón para envío",
+      note: "Embala en cartón resistente y cinta canela.",
     },
     {
-      num: 2,
-      title: "Llena el formato",
-      desc: "Tus datos y los de tu familia. Recibes tu comprobante firmado.",
+      num: "02",
+      icon: FileCheck2,
+      stage: "REGISTRO DIGITAL",
+      title: "Llenado de datos",
+      desc: "El encargado registra remitente y destinatario en el sistema digital.",
       image: "/images/step2-counter.jpg",
-      alt: "Encargado de tienda atendiendo en mostrador",
+      note: "Recibes tu comprobante oficial firmado con folio.",
     },
     {
-      num: 3,
+      num: "03",
+      icon: Truck,
+      stage: "CONSOLIDADO & CRUCE",
       title: "Nosotros la llevamos",
-      desc: "Pasa por nuestra bodega de Milwaukee y cruza segura a México en Texas.",
+      desc: "Camiones directos hacia nuestra base en Laredo para inspección aduanal.",
       image: "/images/step3-truck.jpg",
-      alt: "Camión de transporte de carga en carretera",
+      note: "Manifiesto legal y salidas semanales fijas.",
     },
     {
-      num: 4,
+      num: "04",
+      icon: Home,
+      stage: "DESTINO FINAL",
       title: "Tu familia la recibe",
-      desc: "Directamente en su domicilio en un plazo de 2 a 3 semanas.",
+      desc: "Entrega directa a domicilio en cualquier estado de México.",
       image: "/images/step4-delivery.jpg",
-      alt: "Entrega de paquete a domicilio para la familia",
+      note: "Garantía de entrega habitual de 2 a 3 semanas.",
     },
   ];
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-      <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-        <span className="text-[#8FB838] text-xs font-black uppercase tracking-widest">
-          Transparente y Sencillo
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      {/* Encabezado Editorial */}
+      <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
+        <span className="text-[#7BA029] font-mono text-xs font-bold uppercase tracking-widest block">
+          TRAYECTO PASO A PASO
         </span>
-        <h2 className="text-2xl sm:text-3xl font-black text-[#1E3A5F] tracking-tight">
-          3. ¿Cómo funciona?
+        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0E283F] tracking-tight">
+          ¿Cómo viaja tu paquete a México?
         </h2>
-        <p className="text-xs sm:text-sm text-slate-600">
-          En 4 sencillos pasos tu paquete viaja seguro desde Wisconsin hasta cualquier rincón de México.
+        <p className="text-sm text-slate-600 leading-relaxed">
+          Diseñamos un proceso humano, sin hojas confusas a mano ni riesgos en frontera.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {steps.map((step) => (
-          <div
-            key={step.num}
-            className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between"
-          >
-            <div>
-              <div className="relative h-44 w-full bg-slate-100">
-                <Image
-                  src={step.image}
-                  alt={step.alt}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute top-3 left-3 w-8 h-8 rounded-xl bg-[#1E3A5F] text-white font-black flex items-center justify-center text-sm shadow-md border-2 border-[#8FB838]">
-                  {step.num}
+      {/* Línea de Trayecto Conectada */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        {steps.map((step, idx) => {
+          const Icon = step.icon;
+          return (
+            <div
+              key={step.num}
+              className="bg-white rounded-2xl border border-[#E8E1D5] overflow-hidden shadow-2xs hover:shadow-md transition-all group flex flex-col justify-between"
+            >
+              <div>
+                {/* Fotografía enmarcada */}
+                <div className="relative h-44 w-full bg-slate-900 overflow-hidden">
+                  <Image
+                    src={step.image}
+                    alt={step.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+
+                  {/* Número de paso con estética postal */}
+                  <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-white/95 backdrop-blur-xs text-[#0E283F] font-mono font-black text-xs border border-[#E8E1D5] shadow-2xs">
+                    PASO {step.num}
+                  </div>
+
+                  <div className="absolute bottom-2.5 right-3 text-white">
+                    <Icon size={18} className="text-[#8FB838]" />
+                  </div>
+                </div>
+
+                {/* Contenido */}
+                <div className="p-5 space-y-2">
+                  <span className="text-[10px] font-mono font-bold tracking-wider text-slate-400 block uppercase">
+                    {step.stage}
+                  </span>
+                  <h3 className="font-serif font-bold text-lg text-[#0E283F]">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {step.desc}
+                  </p>
                 </div>
               </div>
-              <div className="p-5 space-y-2">
-                <h3 className="font-bold text-base text-slate-900">{step.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+
+              {/* Nota táctil al pie */}
+              <div className="px-5 py-3 bg-[#FAF8F5] border-t border-[#E8E1D5] text-[11px] text-slate-500 font-medium">
+                {step.note}
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      <div className="text-center">
+      {/* CTA inferior */}
+      <div className="mt-12 text-center">
         <Link
           href="/como-enviar"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-stone-100 text-slate-800 font-bold rounded-xl border border-stone-300 shadow-xs text-xs sm:text-sm transition"
+          className="inline-flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-[#F4EFE6] text-[#0E283F] font-bold rounded-xl border border-[#E8E1D5] shadow-2xs text-xs uppercase tracking-wider transition"
         >
-          <span>Ver guía completa sobre cómo enviar</span>
-          <ArrowRight size={16} />
+          <span>Conoce qué artículos puedes enviar y las reglas de aduana</span>
+          <ArrowRight size={15} className="text-[#7BA029]" />
         </Link>
       </div>
     </section>

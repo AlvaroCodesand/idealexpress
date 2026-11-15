@@ -2,91 +2,142 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { TARIFF_CONFIG } from "@/constants/config";
-import { MessageCircle, MapPin, Package, ShieldCheck } from "lucide-react";
+import { MessageCircle, MapPin, Package, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export const HeroSection: React.FC = () => {
   const waUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20quisiera%20cotizar%20un%20envío%20a%20México.`;
 
   return (
-    <section className="relative bg-gradient-to-b from-[#EBF3F7] via-slate-50 to-white pt-10 sm:pt-16 pb-14 border-b border-slate-200">
+    <section className="relative pt-8 sm:pt-14 pb-16 overflow-hidden border-b border-[#E8E1D5]">
+      {/* Detalle sutil de fondo editorial */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#7BA029]/5 rounded-full blur-3xl pointer-events-none"></div>
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Lado izquierdo: Textos y CTAs */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Lado izquierdo: Composición Tipográfica Editorial */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E5F2D6] text-[#4A6B1A] text-xs font-bold uppercase tracking-wider border border-[#CDE5B3]">
-              <span className="w-2 h-2 rounded-full bg-[#8FB838] animate-pulse"></span>
-              Más de 10 años conectando familias
+            {/* Tag de Ruta Logística Postal */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#F4EFE6] border border-[#E8E1D5] text-[#0E283F] font-mono text-[11px] font-semibold tracking-wide">
+              <span className="w-2 h-2 rounded-full bg-[#7BA029]"></span>
+              <span>RUTA DIRECTA: MILWAUKEE ➔ LAREDO ➔ TODO MÉXICO</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-[#1E3A5F] tracking-tight leading-tight">
-              Envía tu paquete a México con la confianza de una{" "}
-              <span className="text-[#8FB838]">empresa familiar</span>.
+            {/* Titular con Libre Baskerville (Serif cálido y humano) */}
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.4rem] text-[#0E283F] leading-[1.12] tracking-tight">
+              Tus envíos a México, con el cuidado de una{" "}
+              <span className="italic font-normal text-[#7BA029]">familia</span>.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
-              Entrega tu caja en la tienda de tu barrio en Wisconsin. Nosotros la llevamos protegida hasta la puerta de tu familia en cualquier estado de México en{" "}
-              <strong className="text-[#1E3A5F]">2 a 3 semanas</strong>.
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl font-normal">
+              Más de 10 años conectando hogares. Entrega tu caja en la tienda de tu barrio en Wisconsin; nosotros la trasladamos con manifiesto legal hasta las manos de tu familia en{" "}
+              <strong className="text-[#0E283F] font-semibold underline decoration-[#7BA029] decoration-2 underline-offset-4">
+                2 a 3 semanas
+              </strong>.
             </p>
 
-            {/* 3 Botones Principales del Wireframe */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            {/* Ficha de Tarifa Base Rápida */}
+            <div className="inline-flex items-center gap-4 p-3 bg-white rounded-xl border border-[#E8E1D5] shadow-2xs">
+              <div className="px-3 py-1.5 bg-[#FAF8F5] rounded-lg border border-[#E8E1D5] text-center font-mono">
+                <span className="text-[10px] uppercase font-bold text-slate-500 block">Tarifa fija</span>
+                <span className="text-xl font-black text-[#0E283F]">${TARIFF_CONFIG.pricePerPound}</span>
+                <span className="text-[10px] text-slate-500"> / lb</span>
+              </div>
+              <div className="text-xs text-slate-600 space-y-0.5 pr-2">
+                <p className="font-bold text-[#0E283F]">Mínimo 15 lbs (${TARIFF_CONFIG.minPriceUSD} USD)</p>
+                <p className="text-[11px] text-slate-500">Sin cargos ocultos ni trámites aduanales en destino</p>
+              </div>
+            </div>
+
+            {/* 3 Botones Principales con Acabado Artesanal */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
               <a
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition active:scale-95 text-sm sm:text-base"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm hover:shadow-md transition active:scale-95 text-xs sm:text-sm tracking-wide"
               >
-                <MessageCircle size={20} />
+                <MessageCircle size={18} />
                 <span>Enviar por WhatsApp</span>
               </a>
 
               <Link
                 href="/agentes"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#1E3A5F] hover:bg-[#152B47] text-white font-bold rounded-xl shadow-xs transition text-sm sm:text-base"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0E283F] hover:bg-[#183D61] text-white font-bold rounded-xl shadow-xs transition text-xs sm:text-sm tracking-wide"
               >
-                <MapPin size={18} />
+                <MapPin size={17} className="text-[#8FB838]" />
                 <span>Encuentra tu agente</span>
               </Link>
 
               <Link
                 href="/tarifas"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white hover:bg-slate-50 text-[#1E3A5F] font-bold rounded-xl border-2 border-[#1E3A5F] shadow-xs transition text-sm sm:text-base"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white hover:bg-[#F4EFE6] text-[#0E283F] font-bold rounded-xl border border-[#E8E1D5] shadow-2xs transition text-xs sm:text-sm"
               >
-                <Package size={18} className="text-[#8FB838]" />
+                <Package size={17} className="text-slate-500" />
                 <span>Ver tarifas</span>
               </Link>
             </div>
 
-            <div className="pt-3 flex items-center gap-2 text-xs text-slate-500">
-              <ShieldCheck size={16} className="text-[#8FB838] shrink-0" />
-              <span>
-                Cruce aduanal seguro en Texas · Sin trámites difíciles · Pago directo en tienda
+            {/* Garantías */}
+            <div className="pt-2 flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-slate-600">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-[#7BA029] shrink-0" />
+                <span>Cruce directo en Laredo</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-[#7BA029] shrink-0" />
+                <span>Entrega a domicilio</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-[#7BA029] shrink-0" />
+                <span>Póliza de seguro opcional</span>
               </span>
             </div>
           </div>
 
-          {/* Lado derecho: Foto Real de la Bodega y Operación */}
+          {/* Lado derecho: Composición Editorial de Fotografía */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
-              <div className="relative h-72 sm:h-96 w-full">
-                <Image
-                  src="/images/hero-warehouse.jpg"
-                  alt="Bodega central de Ideal Express y manejo de paquetería"
-                  fill
-                  priority
-                  className="object-cover group-hover:scale-105 transition duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F2438]/85 via-transparent to-transparent"></div>
+            <div className="relative">
+              {/* Marco fotográfico estilo postal */}
+              <div className="relative rounded-2xl overflow-hidden bg-white p-2.5 shadow-xl border border-[#E8E1D5]">
+                <div className="relative h-80 sm:h-96 w-full rounded-xl overflow-hidden bg-slate-900">
+                  <Image
+                    src="/images/hero-warehouse.jpg"
+                    alt="Bodega matriz de Ideal Express en Milwaukee"
+                    fill
+                    priority
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E283F]/90 via-transparent to-transparent"></div>
+
+                  {/* Sello de despacho aduanal en esquina */}
+                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded text-[10px] font-mono font-bold text-[#0E283F] border border-[#E8E1D5] uppercase tracking-wider shadow-xs">
+                    EMBARQUE AUTORIZADO · WI
+                  </div>
+
+                  {/* Leyenda al pie */}
+                  <div className="absolute bottom-4 left-4 right-4 text-white text-xs space-y-1">
+                    <span className="bg-[#7BA029] text-[#0E283F] font-mono font-black text-[10px] uppercase px-2 py-0.5 rounded tracking-wider inline-block">
+                      FOTO REAL
+                    </span>
+                    <p className="font-serif font-bold text-sm sm:text-base">
+                      Bodega Matriz Milwaukee · 1565 W Greenfield Ave
+                    </p>
+                    <p className="text-[11px] text-slate-200">
+                      Básculas certificadas y consolidación para camiones semanales.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div className="absolute bottom-4 left-4 right-4 text-white text-xs space-y-1">
-                <span className="bg-[#8FB838] text-[#0F2438] font-black text-[10px] uppercase px-2.5 py-0.5 rounded tracking-wider inline-block">
-                  Foto Real
-                </span>
-                <p className="font-bold text-sm">Bodega Matriz y Centro Logístico Milwaukee</p>
-                <p className="text-[11px] text-slate-300">
-                  Recepción, pesado y consolidación para cruce directo en Laredo.
-                </p>
+              {/* Tarjeta flotante táctil (Aliados de entrega en México) */}
+              <div className="hidden sm:flex items-center gap-3 absolute -bottom-5 -left-6 bg-white p-3.5 rounded-xl border border-[#E8E1D5] shadow-lg">
+                <div className="w-9 h-9 rounded-lg bg-[#F4EFE6] text-[#0E283F] flex items-center justify-center shrink-0">
+                  <ShieldCheck size={20} className="text-[#7BA029]" />
+                </div>
+                <div className="text-xs">
+                  <strong className="block text-[#0E283F] font-bold">Última milla garantizada</strong>
+                  <span className="text-[11px] text-slate-500">Estafeta · Paquetexpress · FedEx</span>
+                </div>
               </div>
             </div>
           </div>

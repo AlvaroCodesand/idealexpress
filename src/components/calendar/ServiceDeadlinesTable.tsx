@@ -1,20 +1,20 @@
 import React from "react";
 import { TARIFF_CONFIG } from "@/constants/config";
-import { Clock, ShieldCheck, Info } from "lucide-react";
+import { Clock, ShieldCheck } from "lucide-react";
 
 export const ServiceDeadlinesTable: React.FC = () => {
   const deadlines = [
     {
       level: "Servicio Regular Estándar",
       deadline: "2 de Diciembre de 2026",
-      coverage: "Todos los municipios de México (Reparto Domiciliar)",
+      coverage: "Todos los municipios de México (Reparto a Domicilio)",
       time: "2 a 3 semanas",
       status: "Recomendado",
     },
     {
-      level: "Servicio Plus Laredo",
+      level: "Servicio Plus Bajío / Centro",
       deadline: "4 de Diciembre de 2026",
-      coverage: "Zona Centro, Bajío, Michoacán y Jalisco",
+      coverage: "Guanajuato, Michoacán, Jalisco, Edo. Méx y CDMX",
       time: "10 a 14 días",
       status: "Prioritario",
     },
@@ -28,46 +28,49 @@ export const ServiceDeadlinesTable: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
-      <div className="space-y-1 pb-2 border-b border-stone-100">
-        <span className="text-[11px] font-black text-[#8FB838] uppercase tracking-widest block">
-          Programación Operativa
-        </span>
-        <h3 className="text-xl font-black text-[#1E3A5F] flex items-center gap-2">
-          <Clock size={22} className="text-[#8FB838]" />
-          <span>Fechas Límite por Nivel de Servicio</span>
+    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-6">
+      <div className="space-y-1.5 pb-3 border-b border-[#E8E1D5]">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-mono font-bold text-[#7BA029] uppercase tracking-widest block">
+            CALENDARIO OPERATIVO
+          </span>
+          <span className="text-[10px] font-mono text-slate-400">SALIDAS FIJAS</span>
+        </div>
+        <h3 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
+          <Clock size={22} className="text-[#7BA029]" />
+          <span>Fechas Límite por Servicio</span>
         </h3>
-        <p className="text-xs text-slate-500">
-          Fechas máximas de recepción en tiendas para garantizar entrega previa a Nochebuena.
+        <p className="text-xs text-slate-600">
+          Fechas máximas de entrega en tienda para garantizar que el paquete esté bajo el árbol de Navidad.
         </p>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="bg-stone-100 text-slate-700 uppercase text-[10px] tracking-wider border-b border-stone-200">
-              <th className="py-3 px-3">Nivel de Servicio</th>
-              <th className="py-3 px-3">Enviar a más tardar</th>
-              <th className="py-3 px-3">Cobertura Principal</th>
+            <tr className="bg-[#FAF8F5] text-slate-700 font-mono text-[10px] uppercase tracking-wider border-b border-[#E8E1D5]">
+              <th className="py-3 px-3.5">Nivel de Servicio</th>
+              <th className="py-3 px-3.5">Fecha Límite</th>
+              <th className="py-3 px-3.5">Cobertura</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-stone-100">
+          <tbody className="divide-y divide-[#E8E1D5]">
             {deadlines.map((item, idx) => (
-              <tr key={idx} className="hover:bg-stone-50 transition">
-                <td className="py-3.5 px-3">
-                  <strong className="block text-slate-900 font-bold text-sm">
+              <tr key={idx} className="hover:bg-[#FAF8F5]/80 transition">
+                <td className="py-4 px-3.5">
+                  <strong className="block text-[#0E283F] font-serif font-bold text-sm">
                     {item.level}
                   </strong>
-                  <span className="text-[11px] text-slate-500">
+                  <span className="text-[11px] font-mono text-slate-500">
                     Tránsito: {item.time}
                   </span>
                 </td>
-                <td className="py-3.5 px-3">
-                  <span className="inline-block px-2.5 py-1 rounded-md bg-[#E5F2D6] text-[#2D450D] border border-[#CDE5B3] font-bold text-xs">
+                <td className="py-4 px-3.5">
+                  <span className="inline-block px-2.5 py-1 rounded bg-[#EBF3DC] text-[#2D450D] border border-[#7BA029]/30 font-mono font-bold text-xs">
                     {item.deadline}
                   </span>
                 </td>
-                <td className="py-3.5 px-3 text-slate-600 font-medium">
+                <td className="py-4 px-3.5 text-slate-600 font-medium">
                   {item.coverage}
                 </td>
               </tr>
@@ -76,13 +79,13 @@ export const ServiceDeadlinesTable: React.FC = () => {
         </table>
       </div>
 
-      <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 text-xs text-slate-600 space-y-2">
-        <div className="flex items-center gap-2 font-bold text-slate-800">
-          <ShieldCheck size={16} className="text-emerald-600 shrink-0" />
-          <span>Compromiso de entrega de temporada:</span>
+      <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#E8E1D5] text-xs text-slate-600 space-y-2">
+        <div className="flex items-center gap-2 font-bold text-[#0E283F]">
+          <ShieldCheck size={16} className="text-[#7BA029] shrink-0" />
+          <span>Compromiso de salida garantizada:</span>
         </div>
         <p className="text-[11px] leading-relaxed">
-          Nuestra logística cuenta con salidas semanales fijas de camiones desde Milwaukee directamente al cruce fronterizo en Texas. Recomendamos empacar y acudir a tu tienda con al menos 3 días de margen sobre la fecha límite.
+          Nuestra flota cuenta con salidas programadas desde Milwaukee hacia Laredo, Texas. Recomendamos empacar y acudir a tu tienda con al menos 2 días de anticipación sobre la fecha límite.
         </p>
       </div>
     </div>
