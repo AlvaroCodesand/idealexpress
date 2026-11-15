@@ -22,63 +22,65 @@ export const QuickAgentMap: React.FC = () => {
   });
 
   return (
-    <section className="py-16 border-y border-[#E8E1D5] bg-[#F4EFE6]/60">
+    <section className="py-20 sm:py-28 border-b border-[#E8E1D5] bg-[#F4EFE6]/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-          <div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0E283F] tracking-tight text-balance">
+        {/* Encabezado Desahogado */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <h2 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
               Encuentra tu Tienda o Agente Cercano
             </h2>
-            <p className="text-sm text-slate-700 mt-1 text-pretty">
-              Puntos hispanos autorizados en Milwaukee, Racine y Sheboygan. Haz clic en cualquiera para ver su ubicación en el mapa.
+            <p className="text-base text-slate-700 leading-relaxed text-pretty">
+              Puntos hispanos autorizados en Milwaukee, Racine y Sheboygan. Entrega tu caja con atención en tu idioma y comprobante digital firmado.
             </p>
           </div>
 
           <Link
             href="/agentes"
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#0E283F] hover:text-[#3E5C10] uppercase tracking-wider shrink-0 bg-white px-4 py-2.5 rounded-lg border border-[#E8E1D5] shadow-2xs transition"
+            className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#0E283F] hover:text-[#3E5C10] uppercase tracking-wider shrink-0 bg-white px-5 py-3 rounded-xl border border-[#E8E1D5] shadow-2xs hover:shadow-xs transition"
           >
-            <span>Directorio completo</span>
-            <ArrowRight size={14} className="text-[#3E5C10]" />
+            <span>Ver todas las tiendas</span>
+            <ArrowRight size={15} className="text-[#3E5C10]" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Lado izquierdo: Buscador y Tarjetas */}
-          <div className="lg:col-span-5 space-y-3.5">
+        {/* Layout Amplio a Dos Columnas */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Lado izquierdo: Buscador y Tarjetas Espaciosas */}
+          <div className="lg:col-span-5 space-y-4">
             <div className="relative">
               <Search
-                size={16}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+                size={18}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"
               />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Escribe tu ciudad o código postal (Milwaukee, 53204)..."
-                className="w-full pl-10 pr-4 py-3 text-xs sm:text-sm border border-[#E8E1D5] rounded-xl bg-white shadow-2xs focus:outline-hidden focus:ring-2 focus:ring-[#0E283F] font-medium placeholder-slate-500 text-[#0E283F]"
+                placeholder="Buscar por ciudad o código postal (Milwaukee, 53204)..."
+                className="w-full pl-11 pr-4 py-3.5 text-xs sm:text-sm border border-[#E8E1D5] rounded-2xl bg-white shadow-2xs focus:outline-hidden focus:ring-2 focus:ring-[#0E283F] font-medium text-[#0E283F] placeholder-slate-500"
               />
             </div>
 
-            <div className="space-y-3 max-h-[480px] overflow-y-auto pr-1">
+            <div className="space-y-3.5 max-h-[500px] overflow-y-auto pr-1">
               {filteredAgents.map((agent) => {
                 const isSelected = selectedAgentId === agent.id;
                 return (
                   <div
                     key={agent.id}
                     onClick={() => setSelectedAgentId(agent.id)}
-                    className={`p-4 rounded-xl border transition-all cursor-pointer ${
+                    className={`p-5 rounded-2xl border transition-all cursor-pointer ${
                       isSelected
                         ? "bg-white border-[#0E283F] shadow-md ring-2 ring-[#3E5C10]/20"
-                        : "bg-white/95 border-[#E8E1D5] hover:border-[#0E283F]/40 shadow-2xs"
+                        : "bg-white/95 border-[#E8E1D5] hover:border-[#0E283F]/40 shadow-2xs hover:bg-white"
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <div className="flex items-start justify-between gap-3 mb-2">
                       <div>
                         <h3 className="font-serif font-bold text-base text-[#0E283F] leading-snug">
                           {agent.storeName}
                         </h3>
-                        <span className="text-xs text-slate-600 block">
+                        <span className="text-xs text-slate-600 block mt-0.5">
                           Atención: {agent.contactName}
                         </span>
                       </div>
@@ -87,25 +89,25 @@ export const QuickAgentMap: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="space-y-1 text-xs text-slate-600 my-2.5">
-                      <p className="flex items-start gap-1.5">
+                    <div className="space-y-1.5 text-xs text-slate-600 my-3">
+                      <p className="flex items-start gap-2">
                         <MapPin size={14} className="text-[#3E5C10] shrink-0 mt-0.5" />
                         <span>
                           {agent.address}, {agent.city}, {agent.state} {agent.zip}
                         </span>
                       </p>
-                      <p className="flex items-center gap-1.5">
+                      <p className="flex items-center gap-2">
                         <Clock size={13} className="text-slate-500 shrink-0" />
                         <span>{agent.hours}</span>
                       </p>
-                      <p className="flex items-center gap-1.5">
+                      <p className="flex items-center gap-2">
                         <Phone size={13} className="text-slate-500 shrink-0" />
                         <span className="font-bold text-[#0E283F]">{agent.phone}</span>
                       </p>
                     </div>
 
-                    <div className="pt-2.5 border-t border-[#F4EFE6] flex items-center justify-between text-xs">
-                      <span className="text-xs font-bold text-[#0E283F] hover:underline flex items-center gap-1">
+                    <div className="pt-3 border-t border-[#F4EFE6] flex items-center justify-between text-xs">
+                      <span className="text-xs font-bold text-[#0E283F] hover:underline flex items-center gap-1.5">
                         <Navigation size={13} className="text-[#3E5C10]" />
                         <span>Ubicar en mapa</span>
                       </span>
@@ -116,7 +118,7 @@ export const QuickAgentMap: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="text-xs font-mono font-bold text-slate-800 hover:text-[#0E283F] bg-[#FAF8F5] hover:bg-[#F4EFE6] px-3 py-1 rounded border border-[#E8E1D5] transition"
+                        className="text-xs font-mono font-bold text-slate-800 hover:text-[#0E283F] bg-[#FAF8F5] hover:bg-[#F4EFE6] px-3.5 py-1.5 rounded-lg border border-[#E8E1D5] transition shadow-2xs"
                       >
                         Cómo llegar ↗
                       </a>
@@ -126,20 +128,20 @@ export const QuickAgentMap: React.FC = () => {
               })}
 
               {filteredAgents.length === 0 && (
-                <div className="p-6 bg-white rounded-xl text-center text-xs text-slate-600 border border-[#E8E1D5]">
-                  No se encontraron agentes para esa búsqueda.
+                <div className="p-8 bg-white rounded-2xl text-center text-xs text-slate-600 border border-[#E8E1D5]">
+                  No se encontraron agentes para ese criterio de búsqueda.
                 </div>
               )}
             </div>
           </div>
 
-          {/* Lado derecho: Mapa */}
+          {/* Lado derecho: Mapa Amplio con altura de 560px */}
           <div className="lg:col-span-7">
             <AgentMap
               agents={filteredAgents}
               selectedAgentId={selectedAgentId}
               onSelectAgent={(agent) => setSelectedAgentId(agent.id)}
-              className="h-[540px] w-full rounded-2xl overflow-hidden border border-[#E8E1D5] shadow-xs"
+              className="h-[560px] w-full rounded-3xl overflow-hidden border border-[#E8E1D5] shadow-sm"
               zoom={11}
             />
           </div>

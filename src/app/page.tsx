@@ -25,17 +25,17 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="space-y-6 pb-12">
-      {/* 1. Hero con Foto Real y 3 Botones Principales */}
+    <div>
+      {/* 1. Hero Amplio y Despejado con Barra Rápida */}
       <HeroSection />
 
-      {/* 2. Proceso en 4 Pasos con Fotos Reales */}
+      {/* 2. Trayecto en 4 Pasos Espaciosos y Visuales */}
       <HowItWorks />
 
-      {/* 3. Encuentra tu Agente: Lista + Mapa Interactivo */}
+      {/* 3. Directorio y Mapa Satelital Desahogado */}
       <QuickAgentMap />
 
-      {/* 4. Fila Compartida de 3 Columnas: Confianza, Tarifa Resumida y FAQs */}
+      {/* 4. Respaldo Familiar, Tarifa Fija y FAQs */}
       <TrustAndFaqRow />
     </div>
   );
