@@ -30,7 +30,7 @@ export const ServiceDeadlinesTable: React.FC = () => {
   return (
     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-6">
       <div className="space-y-1.5 pb-3 border-b border-[#E8E1D5]">
-        <h2 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
+        <h2 className="font-display text-2xl font-bold text-[#0E283F] flex items-center gap-2">
           <Clock size={22} className="text-[#3E5C10]" />
           <span>Fechas Límite por Servicio</span>
         </h2>
@@ -52,7 +52,7 @@ export const ServiceDeadlinesTable: React.FC = () => {
             {deadlines.map((item, idx) => (
               <tr key={idx} className="hover:bg-[#FAF8F5]/80 transition">
                 <td className="py-4 px-3.5">
-                  <strong className="block text-[#0E283F] font-serif font-bold text-sm">
+                  <strong className="block text-[#0E283F] font-display font-bold text-sm">
                     {item.level}
                   </strong>
                   <span className="text-xs font-mono text-slate-600">

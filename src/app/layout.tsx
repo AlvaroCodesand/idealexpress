@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { DM_Sans, Libre_Baskerville, JetBrains_Mono } from "next/font/google";
+import { Archivo, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SeasonAlert } from "@/components/layout/SeasonAlert";
 import { Navbar } from "@/components/layout/Navbar";
@@ -8,17 +8,17 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { LocalBusinessJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 
-const fontSans = DM_Sans({
-  variable: "--font-sans",
+const fontDisplay = Archivo({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["600", "700", "800", "900"],
   display: "swap",
 });
 
-const fontSerif = Libre_Baskerville({
-  variable: "--font-serif",
+const fontSans = DM_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -109,7 +109,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} h-full antialiased`}
+      className={`${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable} h-full antialiased`}
     >
       <head>
         <LocalBusinessJsonLd />

@@ -38,7 +38,7 @@ export default function TarifasClient() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-14">
       {/* 1. HEADER EDITORIAL (Sin chip artificial de IA) */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
           Tarifas Claras y Mostrador Virtual
         </h1>
         <p className="text-sm text-slate-700 leading-relaxed text-pretty">
@@ -59,7 +59,7 @@ export default function TarifasClient() {
                 Recomendado
               </span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-[#0E283F]">
+            <h2 className="font-display text-xl font-bold text-[#0E283F]">
               Servicio Regular México
             </h2>
             <div className="space-y-0.5">
@@ -91,7 +91,7 @@ export default function TarifasClient() {
                 Prioritario
               </span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-[#0E283F]">
+            <h2 className="font-display text-xl font-bold text-[#0E283F]">
               Servicio Plus Bajío / Centro
             </h2>
             <div className="space-y-0.5">
@@ -123,7 +123,7 @@ export default function TarifasClient() {
                 Fronterizo
               </span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-[#0E283F]">
+            <h2 className="font-display text-xl font-bold text-[#0E283F]">
               Servicio Frontera Norte
             </h2>
             <div className="space-y-0.5">
@@ -154,7 +154,7 @@ export default function TarifasClient() {
           {/* Lado izquierdo: Parámetros y Presets */}
           <div className="lg:col-span-7 space-y-6">
             <div className="border-b border-[#E8E1D5] pb-4">
-              <h2 className="font-serif text-2xl font-bold text-[#0E283F]">
+              <h2 className="font-display text-2xl font-bold text-[#0E283F]">
                 Calcula tu caja antes de acudir
               </h2>
               <p className="text-xs text-slate-600 mt-1">

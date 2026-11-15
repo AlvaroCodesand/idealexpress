@@ -69,7 +69,7 @@ export default function ComoEnviarPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-16">
       {/* 1. HEADER (Sin kicker artificial) */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
           Cómo enviar tu paquete a México
         </h1>
         <p className="text-base text-slate-700 leading-relaxed text-pretty">
@@ -97,7 +97,7 @@ export default function ComoEnviarPage() {
                 </div>
               </div>
               <div className="p-5 space-y-2">
-                <h2 className="font-serif font-bold text-base text-[#0E283F]">{step.title}</h2>
+                <h2 className="font-display font-bold text-base text-[#0E283F]">{step.title}</h2>
                 <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
                 <p className="text-xs text-[#3E5C10] font-semibold pt-1">
                   {step.detail}
@@ -112,7 +112,7 @@ export default function ComoEnviarPage() {
       <div className="bg-white rounded-2xl p-6 sm:p-10 border border-[#E8E1D5] shadow-xs">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-3">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0E283F]">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0E283F]">
               ¿Ya te dieron tu número de guía?
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty">
@@ -151,7 +151,7 @@ export default function ComoEnviarPage() {
             <Clock size={16} />
             <span>Tiempo de Tránsito Garantizado</span>
           </div>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold">
+          <h2 className="font-display text-2xl sm:text-3xl font-bold">
             ¿Cuánto tarda en llegar?
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 text-pretty">
@@ -171,7 +171,7 @@ export default function ComoEnviarPage() {
       {/* 5. REGULACIONES: PERMITIDOS VS RESTRINGIDOS */}
       <div className="bg-white rounded-2xl border border-[#E8E1D5] p-6 sm:p-10 shadow-xs space-y-8">
         <div>
-          <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0E283F] mb-1">
+          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#0E283F] mb-1">
             Artículos Permitidos y Prohibidos en Aduana
           </h2>
           <p className="text-xs sm:text-sm text-slate-600">

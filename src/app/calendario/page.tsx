@@ -28,7 +28,7 @@ export default function CalendarioPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
       {/* HEADER (Sin kicker artificial de IA) */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
           Calendario de Envíos Navideños
         </h1>
         <p className="text-base text-slate-700 leading-relaxed text-pretty">
@@ -49,7 +49,7 @@ export default function CalendarioPage() {
       {/* CTA DE AYUDA DIRECTA */}
       <div className="bg-[#0E283F] text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md border border-[#183D61]">
         <div className="space-y-1 text-center sm:text-left">
-          <h2 className="font-serif font-bold text-lg text-white">¿Tienes un caso especial o fecha límite ajustada?</h2>
+          <h2 className="font-display font-bold text-lg text-white">¿Tienes un caso especial o fecha límite ajustada?</h2>
           <p className="text-xs text-slate-300">
             Podemos orientarte por WhatsApp sobre la ruta de camión más próxima desde Milwaukee.
           </p>

@@ -35,7 +35,7 @@ export const Accordion: React.FC<AccordionProps> = ({
             <button
               type="button"
               onClick={() => toggle(item.id)}
-              className="w-full text-left flex items-center justify-between gap-3 font-serif font-bold text-sm text-[#0E283F] hover:text-[#3E5C10] transition py-1"
+              className="w-full text-left flex items-center justify-between gap-3 font-display font-bold text-sm text-[#0E283F] hover:text-[#3E5C10] transition py-1"
               aria-expanded={isOpen}
             >
               <span>{item.title}</span>

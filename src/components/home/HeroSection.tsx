@@ -19,7 +19,7 @@ export const HeroSection: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-[#0E283F] leading-[1.14] tracking-tight text-balance">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-[#0E283F] leading-[1.14] tracking-tight text-balance">
                 Tus envíos a México, seguros y de familia a familia.
               </h1>
 
@@ -46,7 +46,7 @@ export const HeroSection: React.FC = () => {
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <span className="text-slate-500 block font-medium">Tiempo de entrega</span>
-                  <span className="text-lg font-serif font-bold text-[#0E283F]">2 a 3 semanas</span>
+                  <span className="text-lg font-display font-bold text-[#0E283F]">2 a 3 semanas</span>
                 </div>
               </div>
 
@@ -116,7 +116,7 @@ export const HeroSection: React.FC = () => {
 
               {/* Leyenda inferior desahogada */}
               <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                <p className="font-serif font-bold text-lg sm:text-xl leading-snug">
+                <p className="font-display font-bold text-lg sm:text-xl leading-snug">
                   1565 W Greenfield Ave, Milwaukee
                 </p>
                 <p className="text-xs text-slate-300">

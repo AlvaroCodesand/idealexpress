@@ -35,7 +35,7 @@ export const TrustAndFaqRow: React.FC = () => {
           <div className="bg-[#FAF8F5] rounded-3xl p-7 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="space-y-1.5">
-                <h3 className="font-serif text-2xl font-bold text-[#0E283F]">
+                <h3 className="font-display text-2xl font-bold text-[#0E283F]">
                   Trato de Familia a Familia
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 text-pretty">
@@ -78,7 +78,7 @@ export const TrustAndFaqRow: React.FC = () => {
                 </span>
                 <span>Milwaukee ➔ México</span>
               </div>
-              <h3 className="font-serif text-2xl font-bold text-white">
+              <h3 className="font-display text-2xl font-bold text-white">
                 Costo Claro por Libra
               </h3>
               <p className="text-xs text-slate-300 text-pretty leading-relaxed">
@@ -115,7 +115,7 @@ export const TrustAndFaqRow: React.FC = () => {
           <div className="bg-[#FAF8F5] rounded-3xl p-7 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="space-y-1.5">
-                <h3 className="font-serif text-2xl font-bold text-[#0E283F]">
+                <h3 className="font-display text-2xl font-bold text-[#0E283F]">
                   Preguntas Frecuentes
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 text-pretty">

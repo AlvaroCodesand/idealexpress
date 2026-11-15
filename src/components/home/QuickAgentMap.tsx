@@ -27,7 +27,7 @@ export const QuickAgentMap: React.FC = () => {
         {/* Encabezado Desahogado */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-2 max-w-2xl">
-            <h2 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
+            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
               Encuentra tu Tienda o Agente Cercano
             </h2>
             <p className="text-base text-slate-700 leading-relaxed text-pretty">
@@ -77,7 +77,7 @@ export const QuickAgentMap: React.FC = () => {
                   >
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <div>
-                        <h3 className="font-serif font-bold text-base text-[#0E283F] leading-snug">
+                        <h3 className="font-display font-bold text-base text-[#0E283F] leading-snug">
                           {agent.storeName}
                         </h3>
                         <span className="text-xs text-slate-600 block mt-0.5">

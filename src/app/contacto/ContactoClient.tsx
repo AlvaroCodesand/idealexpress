@@ -32,7 +32,7 @@ export default function ContactoClient() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
       {/* 1. HEADER (Sin kicker artificial) */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
-        <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
           Contacto y Bodega Matriz
         </h1>
         <p className="text-sm text-slate-700 leading-relaxed text-pretty">
@@ -45,7 +45,7 @@ export default function ContactoClient() {
         {/* Columna Izquierda: Datos Oficiales y Programar Recolección */}
         <div className="lg:col-span-6 space-y-6">
           <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-            <h2 className="font-serif text-xl font-bold text-[#0E283F] border-b border-slate-100 pb-3">
+            <h2 className="font-display text-xl font-bold text-[#0E283F] border-b border-slate-100 pb-3">
               Datos de Contacto Directo
             </h2>
 
@@ -118,7 +118,7 @@ export default function ContactoClient() {
               <Truck size={18} />
               <span>Servicio a Domicilio</span>
             </div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold">
+            <h2 className="font-display text-xl sm:text-2xl font-bold">
               Programar recolección
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed text-pretty">
@@ -140,7 +140,7 @@ export default function ContactoClient() {
           {/* Mapa Interactivo de la Bodega */}
           <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="font-serif font-bold text-base text-[#0E283F] flex items-center gap-2">
+              <h2 className="font-display font-bold text-base text-[#0E283F] flex items-center gap-2">
                 <MapPin size={18} className="text-[#3E5C10]" />
                 <span>Ubicación de la Bodega Matriz</span>
               </h2>
@@ -154,7 +154,7 @@ export default function ContactoClient() {
 
           {/* Formulario */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
-            <h2 className="font-serif font-bold text-base text-slate-900">Envíanos un mensaje</h2>
+            <h2 className="font-display font-bold text-base text-slate-900">Envíanos un mensaje</h2>
 
             {submitted ? (
               <div className="p-6 bg-emerald-50 border border-emerald-200 rounded-xl text-center text-xs space-y-2">

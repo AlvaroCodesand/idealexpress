@@ -44,7 +44,7 @@ export const HowItWorks: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Encabezado Espacioso */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
             ¿Cómo viaja tu paquete a México?
           </h2>
           <p className="text-base text-slate-700 leading-relaxed text-pretty">
@@ -84,7 +84,7 @@ export const HowItWorks: React.FC = () => {
                     <span className="text-xs font-mono font-bold text-slate-500 block uppercase tracking-wider">
                       {step.stage}
                     </span>
-                    <h3 className="font-serif font-bold text-xl text-[#0E283F]">
+                    <h3 className="font-display font-bold text-xl text-[#0E283F]">
                       {step.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty">

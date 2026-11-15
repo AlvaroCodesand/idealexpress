@@ -24,7 +24,7 @@ export const DeliveryDateChecker: React.FC = () => {
   return (
     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-6">
       <div className="space-y-1.5 pb-3 border-b border-[#E8E1D5]">
-        <h2 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
+        <h2 className="font-display text-2xl font-bold text-[#0E283F] flex items-center gap-2">
           <Calendar size={22} className="text-[#3E5C10]" />
           <span>¿Llega a tiempo para Navidad?</span>
         </h2>
@@ -66,7 +66,7 @@ export const DeliveryDateChecker: React.FC = () => {
             </span>
             <span className="font-mono font-bold text-[#2D450D]">Garantía Confirmada</span>
           </div>
-          <p className="font-serif text-base font-bold text-[#2D450D] mt-1">{result.message}</p>
+          <p className="font-display text-base font-bold text-[#2D450D] mt-1">{result.message}</p>
           <p className="text-xs text-[#2D450D]/90 leading-relaxed font-sans">{result.subMessage}</p>
         </div>
       )}
@@ -80,7 +80,7 @@ export const DeliveryDateChecker: React.FC = () => {
             </span>
             <span className="font-mono font-bold text-amber-900">Tránsito Regular</span>
           </div>
-          <p className="font-serif text-base font-bold text-amber-950 mt-1">{result.message}</p>
+          <p className="font-display text-base font-bold text-amber-950 mt-1">{result.message}</p>
           <p className="text-xs text-amber-900 leading-relaxed font-sans">{result.subMessage}</p>
           <a
             href={waUrl}

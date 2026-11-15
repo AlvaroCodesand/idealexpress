@@ -39,7 +39,7 @@ export default function AgentesClient() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
       {/* 1. HEADER (Sin kicker artificial) */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
-        <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
           Directorio de Tiendas y Agentes Aliados
         </h1>
         <p className="text-sm text-slate-700 leading-relaxed text-pretty">
@@ -97,7 +97,7 @@ export default function AgentesClient() {
               >
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div>
-                    <h2 className="font-serif font-bold text-base text-[#0E283F] leading-snug">
+                    <h2 className="font-display font-bold text-base text-[#0E283F] leading-snug">
                       {agent.storeName}
                     </h2>
                     <span className="text-xs text-slate-600 block">
@@ -178,7 +178,7 @@ export default function AgentesClient() {
             <Building2 size={15} />
             <span>Red de Agentes Autorizados</span>
           </div>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight">
+          <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight">
             ¿Tienes un comercio hispano en Wisconsin?
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed text-pretty">
