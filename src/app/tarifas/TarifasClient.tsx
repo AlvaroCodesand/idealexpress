@@ -35,7 +35,7 @@ export default function TarifasClient() {
   const waUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=${waQuoteText}`;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-14">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-16 space-y-16">
       {/* 1. HEADER EDITORIAL (Sin chip artificial de IA) */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">

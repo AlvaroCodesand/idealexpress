@@ -6,7 +6,7 @@ import { Sparkles, ArrowRight, Clock } from "lucide-react";
 export const SeasonAlert: React.FC = () => {
   return (
     <div className="bg-[#0E283F] text-white py-2.5 px-4 border-b border-[#1E3A5F] shadow-xs relative z-50">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
         <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start">
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#7BA029]/20 text-[#8FB838] font-mono text-xs font-bold uppercase tracking-wider border border-[#7BA029]/40">
             <Sparkles size={12} className="text-[#8FB838]" />

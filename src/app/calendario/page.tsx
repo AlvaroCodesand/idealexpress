@@ -25,7 +25,7 @@ export default function CalendarioPage() {
   const waUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20deseo%20confirmar%20fechas%20de%20envío%20para%20Navidad.`;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-16 space-y-16">
       {/* HEADER (Sin kicker artificial de IA) */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">

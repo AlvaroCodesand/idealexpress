@@ -23,7 +23,7 @@ export const QuickAgentMap: React.FC = () => {
 
   return (
     <section className="py-20 sm:py-28 border-b border-[#E8E1D5] bg-[#F4EFE6]/50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         {/* Encabezado Desahogado */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-2 max-w-2xl">

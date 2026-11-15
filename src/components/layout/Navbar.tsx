@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E8E1D5] sticky top-0 z-40 transition-all">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo Oficial de Ideal Express */}
           <Link href="/" className="flex items-center gap-3 group py-1">

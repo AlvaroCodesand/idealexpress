@@ -2,129 +2,135 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { TARIFF_CONFIG } from "@/constants/config";
-import { MessageCircle, MapPin, Package, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { MessageCircle, MapPin, Package, CheckCircle2, ArrowRight } from "lucide-react";
 
 export const HeroSection: React.FC = () => {
   const waUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20quisiera%20cotizar%20un%20envío%20a%20México.`;
 
   return (
-    <section className="relative pt-12 sm:pt-20 pb-20 sm:pb-28 border-b border-[#E8E1D5] bg-gradient-to-b from-[#F4EFE6]/60 via-[#FAF8F5] to-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Lado izquierdo: Tipografía amplia y aireada */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E8E1D5] text-[#0E283F] font-mono text-xs shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#3E5C10]"></span>
-              <span>Wisconsin ➔ Laredo ➔ Todo México</span>
-            </div>
+    <section className="relative min-h-[620px] lg:min-h-[680px] flex items-center justify-center pt-16 pb-24 overflow-hidden bg-[#0E283F]">
+      {/* 1. Fotografía Panorámica de Fondo con Velo Marino */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero-warehouse.jpg"
+          alt="Bodega central de Ideal Express en Milwaukee"
+          fill
+          priority
+          className="object-cover object-center scale-105"
+        />
+        {/* Velo oscuro gradual para máxima legibilidad tipográfica */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0E283F]/90 via-[#0E283F]/85 to-[#0E283F]"></div>
+      </div>
 
-            <div className="space-y-4">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-[#0E283F] leading-[1.14] tracking-tight text-balance">
-                Tus envíos a México, seguros y de familia a familia.
-              </h1>
+      {/* 2. Contenido Central Desahogado y Espacioso */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-8">
+        {/* Tag de Ruta Logística */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-mono text-xs shadow-sm">
+          <span className="w-2 h-2 rounded-full bg-[#8FB838]"></span>
+          <span>Wisconsin ➔ Cruce Seguro Laredo ➔ Todo México</span>
+        </div>
 
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl text-pretty font-normal">
-                Llevamos tus paquetes desde Wisconsin hasta la puerta de tu familia en cualquier estado de México en{" "}
-                <strong className="text-[#0E283F] font-semibold underline decoration-[#7BA029] decoration-2 underline-offset-4">
-                  2 a 3 semanas
-                </strong>. Entrega en la tienda hispana de tu barrio sin complicaciones.
-              </p>
-            </div>
+        {/* Titular Principal en Archivo Moderno */}
+        <h1 className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-white leading-[1.15] tracking-tight text-balance">
+          Tus envíos a México, seguros y de familia a familia.
+        </h1>
 
-            {/* Barra de Utilidad Rápida (Patrón Estafeta / FedEx desahogado) */}
-            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-[#E8E1D5] shadow-xs space-y-4">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pb-4 border-b border-[#E8E1D5] text-xs">
-                <div>
-                  <span className="text-slate-500 block font-medium">Tarifa fija por libra</span>
-                  <span className="text-2xl font-mono font-bold text-[#0E283F]">${TARIFF_CONFIG.pricePerPound}</span>
-                  <span className="text-slate-500 font-mono"> USD</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block font-medium">Mínimo cobrable</span>
-                  <span className="text-2xl font-mono font-bold text-[#0E283F]">{TARIFF_CONFIG.minPounds}</span>
-                  <span className="text-slate-500 font-mono"> lbs (${TARIFF_CONFIG.minPriceUSD})</span>
-                </div>
-                <div className="col-span-2 sm:col-span-1">
-                  <span className="text-slate-500 block font-medium">Tiempo de entrega</span>
-                  <span className="text-lg font-display font-bold text-[#0E283F]">2 a 3 semanas</span>
-                </div>
+        {/* Párrafo Despejado y Legible */}
+        <p className="text-base sm:text-xl text-slate-200 leading-relaxed max-w-3xl mx-auto text-pretty font-normal">
+          Más de 10 años conectando hogares. Entrega tu caja en la tienda hispana de tu barrio en Wisconsin; nosotros la trasladamos con manifiesto aduanal legal hasta la puerta de tu gente en{" "}
+          <strong className="text-white font-bold underline decoration-[#8FB838] decoration-2 underline-offset-4">
+            2 a 3 semanas
+          </strong>.
+        </p>
+
+        {/* 3. Mostrador Flotante Espacioso (Patrón Estafeta / FedEx) */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/40 text-left text-[#0E283F] space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-6 border-b border-[#E8E1D5] text-center sm:text-left">
+            {/* Pilar 1: Tarifa */}
+            <div className="space-y-1">
+              <span className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider block">
+                Tarifa Fija Oficial
+              </span>
+              <div className="flex items-baseline justify-center sm:justify-start gap-1 font-mono">
+                <span className="text-3xl sm:text-4xl font-extrabold text-[#0E283F]">${TARIFF_CONFIG.pricePerPound}</span>
+                <span className="text-xs font-bold text-slate-600 uppercase">USD / lb</span>
               </div>
-
-              {/* Botones de acción directos */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl transition shadow-xs active:scale-95 text-xs sm:text-sm tracking-wide"
-                >
-                  <MessageCircle size={18} />
-                  <span>Cotizar por WhatsApp</span>
-                </a>
-
-                <Link
-                  href="/agentes"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0E283F] hover:bg-[#183D61] text-white font-bold rounded-xl transition text-xs sm:text-sm tracking-wide shadow-xs"
-                >
-                  <MapPin size={17} className="text-[#8FB838]" />
-                  <span>Buscar Tienda</span>
-                </Link>
-
-                <Link
-                  href="/tarifas"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#0E283F] font-bold rounded-xl border border-[#E8E1D5] transition text-xs sm:text-sm"
-                >
-                  <Package size={17} className="text-slate-500" />
-                  <span>Ver Tarifas</span>
-                </Link>
-              </div>
+              <p className="text-xs text-slate-500">Mínimo 15 lbs (${TARIFF_CONFIG.minPriceUSD} USD)</p>
             </div>
 
-            {/* Garantías al pie del hero */}
-            <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-slate-600 pt-1">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-[#3E5C10] shrink-0" />
-                <span>Salidas semanales desde Milwaukee</span>
+            {/* Pilar 2: Tiempo */}
+            <div className="space-y-1">
+              <span className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider block">
+                Tiempo de Tránsito
               </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-[#3E5C10] shrink-0" />
-                <span>Cruce directo en Laredo, Texas</span>
+              <div className="text-2xl sm:text-3xl font-display font-extrabold text-[#0E283F] pt-0.5">
+                2 a 3 semanas
+              </div>
+              <p className="text-xs text-slate-500">Entrega garantizada a domicilio</p>
+            </div>
+
+            {/* Pilar 3: Salidas */}
+            <div className="space-y-1">
+              <span className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider block">
+                Flota y Logística
               </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-[#3E5C10] shrink-0" />
-                <span>Entrega con Estafeta, FedEx y Paquetexpress</span>
-              </span>
+              <div className="text-lg sm:text-xl font-display font-bold text-[#0E283F] pt-1">
+                Salidas Semanales
+              </div>
+              <p className="text-xs text-slate-500">Desde Milwaukee directo a Laredo</p>
             </div>
           </div>
 
-          {/* Lado derecho: Fotografía limpia y espaciosa */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="relative h-96 sm:h-[460px] w-full rounded-3xl overflow-hidden shadow-lg bg-slate-900 border border-[#E8E1D5]">
-              <Image
-                src="/images/hero-warehouse.jpg"
-                alt="Bodega matriz de Ideal Express en Milwaukee"
-                fill
-                priority
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0E283F]/85 via-black/20 to-transparent"></div>
+          {/* Botones de Acción Directos con Mayor Tamaño y Confort Táctil */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 w-full sm:w-auto">
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-2xl transition shadow-sm active:scale-95 text-sm tracking-wide w-full sm:w-auto"
+              >
+                <MessageCircle size={19} />
+                <span>Cotizar por WhatsApp</span>
+              </a>
 
-              {/* Tag superior */}
-              <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-xs px-3 py-1.5 rounded-lg text-xs font-mono font-bold text-[#0E283F] uppercase shadow-xs">
-                Bodega Matriz · Milwaukee, WI
-              </div>
+              <Link
+                href="/agentes"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#0E283F] hover:bg-[#183D61] text-white font-bold rounded-2xl transition shadow-xs text-sm tracking-wide w-full sm:w-auto"
+              >
+                <MapPin size={18} className="text-[#8FB838]" />
+                <span>Encuentra tu Tienda</span>
+              </Link>
 
-              {/* Leyenda inferior desahogada */}
-              <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                <p className="font-display font-bold text-lg sm:text-xl leading-snug">
-                  1565 W Greenfield Ave, Milwaukee
-                </p>
-                <p className="text-xs text-slate-300">
-                  Centro logístico de recepción, pesado y consolidación aduanal.
-                </p>
-              </div>
+              <Link
+                href="/tarifas"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#F4EFE6] hover:bg-[#E8E1D5] text-[#0E283F] font-bold rounded-2xl transition text-sm w-full sm:w-auto"
+              >
+                <Package size={18} className="text-slate-600" />
+                <span>Ver Tarifas</span>
+              </Link>
+            </div>
+
+            <div className="text-xs text-slate-500 font-medium text-center sm:text-right hidden lg:block">
+              Bodega Matriz: 1565 W Greenfield Ave · Tel: (414) 763-8705
             </div>
           </div>
+        </div>
+
+        {/* Puntos de Confianza Inferiores */}
+        <div className="flex flex-wrap items-center justify-center gap-y-2 gap-x-8 text-xs sm:text-sm text-slate-300 font-medium pt-2">
+          <span className="flex items-center gap-2">
+            <CheckCircle2 size={16} className="text-[#8FB838]" />
+            <span>Manifiesto aduanal legal</span>
+          </span>
+          <span className="flex items-center gap-2">
+            <CheckCircle2 size={16} className="text-[#8FB838]" />
+            <span>Sin trámites para tu familiar en México</span>
+          </span>
+          <span className="flex items-center gap-2">
+            <CheckCircle2 size={16} className="text-[#8FB838]" />
+            <span>Última milla con Estafeta, FedEx & Paquetexpress</span>
+          </span>
         </div>
       </div>
     </section>

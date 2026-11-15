@@ -29,7 +29,7 @@ export const TrustAndFaqRow: React.FC = () => {
 
   return (
     <section className="py-20 sm:py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 items-stretch">
           {/* Columna 1: Confianza */}
           <div className="bg-[#FAF8F5] rounded-3xl p-7 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-5 flex flex-col justify-between">

@@ -41,7 +41,7 @@ export const HowItWorks: React.FC = () => {
 
   return (
     <section className="py-20 sm:py-28 bg-white border-b border-[#E8E1D5]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         {/* Encabezado Espacioso */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">

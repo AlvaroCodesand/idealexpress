@@ -36,7 +36,7 @@ export default function AgentesClient() {
   const waAgentUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20tengo%20un%20negocio%20y%20me%20gustaría%20ser%20agente%20de%20Ideal%20Express.`;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-16 space-y-16">
       {/* 1. HEADER (Sin kicker artificial) */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
         <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
