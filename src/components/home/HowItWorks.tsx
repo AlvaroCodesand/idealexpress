@@ -1,16 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import { ArrowRight, Clock, ShieldCheck } from "lucide-react";
 import {
-  ArrowRight,
-  Package,
-  Store,
-  FileCheck2,
-  Truck,
-  Home,
-  CheckCircle2,
-  Clock,
-  ShieldCheck,
-} from "lucide-react";
+  StoreDropoffIllustration,
+  DigitalReceiptIllustration,
+  HighwayFreightIllustration,
+  HomeDeliveryIllustration,
+} from "./illustrations/ProcessIllustrations";
 
 export const HowItWorks: React.FC = () => {
   const steps = [
@@ -18,64 +14,33 @@ export const HowItWorks: React.FC = () => {
       num: "01",
       speedTag: "3 MINUTOS",
       title: "Entrega en Tienda",
-      stage: "Recepción Rápida",
-      desc: "Llegas a la tienda hispana aliada más cercana en tu barrio y entregas tu paquete directamente en mostrador.",
-      icon: (
-        <div className="relative w-14 h-14 rounded-2xl bg-[#F4EFE6] text-[#0E283F] flex items-center justify-center group-hover:bg-[#0E283F] group-hover:text-white transition-colors duration-300">
-          <Store size={26} className="text-[#0E283F] group-hover:text-white transition-colors" />
-          <div className="absolute -top-1 -right-1 w-6 h-6 rounded-md bg-[#3E5C10] text-white flex items-center justify-center animate-subtle-float">
-            <Package size={13} />
-          </div>
-        </div>
-      ),
+      stage: "Recepción en Mostrador",
+      desc: "Llegas a la tienda hispana aliada de tu barrio con tu caja lista y la entregas sin filas.",
+      illustration: <StoreDropoffIllustration />,
     },
     {
       num: "02",
       speedTag: "AL INSTANTE",
       title: "Registro Digital",
-      stage: "Comprobante con Folio",
-      desc: "El encargado captura los datos en segundos y te entrega tu recibo oficial firmado con folio único de rastreo.",
-      icon: (
-        <div className="relative w-14 h-14 rounded-2xl bg-[#EBF3DC] text-[#3E5C10] flex items-center justify-center group-hover:bg-[#3E5C10] group-hover:text-white transition-colors duration-300">
-          <FileCheck2 size={26} className="text-[#3E5C10] group-hover:text-white transition-colors" />
-          <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#0E283F] text-white flex items-center justify-center">
-            <CheckCircle2 size={12} className="text-[#8FB838]" />
-          </div>
-        </div>
-      ),
+      stage: "Folio & Comprobante",
+      desc: "El encargado captura tus datos en pantalla táctil y te entrega tu comprobante firmado.",
+      illustration: <DigitalReceiptIllustration />,
     },
     {
       num: "03",
       speedTag: "SALIDA SEMANAL",
       title: "Tránsito & Aduana",
       stage: "Ruta Directa a Texas",
-      desc: "Nuestros camiones concentran la carga en Milwaukee y avanzan a Laredo para inspección aduanal legal sin demoras.",
-      icon: (
-        <div className="relative w-14 h-14 rounded-2xl bg-[#EBF3F7] text-[#183D61] flex items-center justify-center group-hover:bg-[#183D61] group-hover:text-white transition-colors duration-300 overflow-hidden">
-          <div className="animate-truck-glide">
-            <Truck size={28} className="text-[#183D61] group-hover:text-white transition-colors" />
-          </div>
-          <div className="absolute bottom-1.5 left-2 flex gap-0.5 opacity-60">
-            <span className="w-2 h-0.5 bg-[#8FB838] rounded-full"></span>
-            <span className="w-1 h-0.5 bg-[#8FB838] rounded-full"></span>
-          </div>
-        </div>
-      ),
+      desc: "Camiones propios concentran la carga en Milwaukee y cruzan con manifiesto legal en Laredo.",
+      illustration: <HighwayFreightIllustration />,
     },
     {
       num: "04",
       speedTag: "2 A 3 SEMANAS",
       title: "Entrega en Domicilio",
       stage: "En Manos de tu Familia",
-      desc: "Tu destinatario recibe la caja directamente en la puerta de su casa en cualquier municipio de la República Mexicana.",
-      icon: (
-        <div className="relative w-14 h-14 rounded-2xl bg-white border border-[#E8E1D5] text-[#0E283F] flex items-center justify-center group-hover:border-[#3E5C10] transition-colors duration-300">
-          <Home size={26} className="text-[#0E283F] group-hover:scale-105 transition-transform" />
-          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#3E5C10] text-white flex items-center justify-center">
-            <ShieldCheck size={12} />
-          </div>
-        </div>
-      ),
+      desc: "Tu familiar recibe la caja directamente en la puerta de su casa en cualquier estado de México.",
+      illustration: <HomeDeliveryIllustration />,
     },
   ];
 
@@ -86,7 +51,7 @@ export const HowItWorks: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF8F5] border border-[#E8E1D5] text-xs font-mono font-semibold text-[#0E283F] mb-1">
             <Clock size={13} className="text-[#3E5C10]" />
-            <span>FLUJO ÁGIL Y RASTREABLE</span>
+            <span>DIAGRAMA DE RUTA ÁGIL</span>
           </div>
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
             De tu tienda en Wisconsin a la puerta de tu gente
@@ -96,29 +61,31 @@ export const HowItWorks: React.FC = () => {
           </p>
         </div>
 
-        {/* Ruta Conectada con Iconos en Movimiento Dinámico */}
+        {/* Diagrama de 4 Estaciones con Ilustraciones Vectoriales */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step) => (
             <div
               key={step.num}
-              className="bg-[#FAF8F5] rounded-3xl p-7 border border-[#E8E1D5] hover:border-[#0E283F] transition-all duration-300 group flex flex-col justify-between space-y-6 hover:shadow-xs"
+              className="bg-[#FAF8F5] rounded-3xl p-6 sm:p-7 border border-[#E8E1D5] hover:border-[#0E283F] transition-all duration-300 group flex flex-col justify-between space-y-5 hover:shadow-md"
             >
-              <div className="space-y-5">
-                {/* Cabecera del paso con icono animado y badge de velocidad */}
-                <div className="flex items-center justify-between">
-                  {step.icon}
-                  <div className="text-right">
-                    <span className="font-mono font-bold text-xl text-slate-600 group-hover:text-[#0E283F] transition-colors block">
-                      {step.num}
-                    </span>
-                    <span className="inline-block text-[#3E5C10] font-mono font-bold text-xs uppercase tracking-wider">
-                      {step.speedTag}
-                    </span>
-                  </div>
+              <div className="space-y-4">
+                {/* Cabecera del paso */}
+                <div className="flex items-center justify-between border-b border-[#E8E1D5] pb-3">
+                  <span className="font-mono font-black text-2xl text-[#0E283F]">
+                    {step.num}
+                  </span>
+                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-white text-[#3E5C10] font-mono font-bold text-xs uppercase tracking-wider border border-[#E8E1D5]">
+                    {step.speedTag}
+                  </span>
                 </div>
 
-                {/* Título y descripción ágil */}
-                <div className="space-y-1.5">
+                {/* Ilustración Vectorial Editorial */}
+                <div className="w-full flex items-center justify-center py-2">
+                  {step.illustration}
+                </div>
+
+                {/* Título y descripción */}
+                <div className="space-y-1.5 pt-1">
                   <span className="text-xs font-mono font-semibold text-slate-500 block uppercase tracking-wider">
                     {step.stage}
                   </span>
@@ -133,19 +100,19 @@ export const HowItWorks: React.FC = () => {
 
               {/* Indicador de avance hacia el siguiente paso */}
               <div className="pt-3 border-t border-[#E8E1D5] flex items-center justify-between text-xs font-mono text-slate-600 group-hover:text-[#0E283F] transition-colors">
-                <span>Paso {step.num} de 04</span>
+                <span>Estación {step.num} de 04</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform text-[#3E5C10]" />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Barra de Certidumbre y Velocidad */}
+        {/* Barra de Certidumbre */}
         <div className="mt-14 p-6 rounded-2xl bg-[#FAF8F5] border border-[#E8E1D5] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
           <div className="flex items-center gap-3 text-slate-700">
             <ShieldCheck size={20} className="text-[#3E5C10] shrink-0" />
             <span>
-              <strong>Sin papeleos tardados:</strong> El llenado se hace en pantalla táctil en tienda y toma menos de 3 minutos.
+              <strong>Sin papeleos tardados:</strong> El llenado se hace en pantalla digital en tienda y toma menos de 3 minutos.
             </span>
           </div>
 
