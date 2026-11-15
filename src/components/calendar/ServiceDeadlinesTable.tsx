@@ -30,16 +30,10 @@ export const ServiceDeadlinesTable: React.FC = () => {
   return (
     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-6">
       <div className="space-y-1.5 pb-3 border-b border-[#E8E1D5]">
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono font-bold text-[#7BA029] uppercase tracking-widest block">
-            CALENDARIO OPERATIVO
-          </span>
-          <span className="text-[10px] font-mono text-slate-400">SALIDAS FIJAS</span>
-        </div>
-        <h3 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
-          <Clock size={22} className="text-[#7BA029]" />
+        <h2 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
+          <Clock size={22} className="text-[#3E5C10]" />
           <span>Fechas Límite por Servicio</span>
-        </h3>
+        </h2>
         <p className="text-xs text-slate-600">
           Fechas máximas de entrega en tienda para garantizar que el paquete esté bajo el árbol de Navidad.
         </p>
@@ -48,7 +42,7 @@ export const ServiceDeadlinesTable: React.FC = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="bg-[#FAF8F5] text-slate-700 font-mono text-[10px] uppercase tracking-wider border-b border-[#E8E1D5]">
+            <tr className="bg-[#FAF8F5] text-slate-700 font-mono text-xs uppercase tracking-wider border-b border-[#E8E1D5]">
               <th className="py-3 px-3.5">Nivel de Servicio</th>
               <th className="py-3 px-3.5">Fecha Límite</th>
               <th className="py-3 px-3.5">Cobertura</th>
@@ -61,7 +55,7 @@ export const ServiceDeadlinesTable: React.FC = () => {
                   <strong className="block text-[#0E283F] font-serif font-bold text-sm">
                     {item.level}
                   </strong>
-                  <span className="text-[11px] font-mono text-slate-500">
+                  <span className="text-xs font-mono text-slate-600">
                     Tránsito: {item.time}
                   </span>
                 </td>
@@ -81,10 +75,10 @@ export const ServiceDeadlinesTable: React.FC = () => {
 
       <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#E8E1D5] text-xs text-slate-600 space-y-2">
         <div className="flex items-center gap-2 font-bold text-[#0E283F]">
-          <ShieldCheck size={16} className="text-[#7BA029] shrink-0" />
+          <ShieldCheck size={16} className="text-[#3E5C10] shrink-0" />
           <span>Compromiso de salida garantizada:</span>
         </div>
-        <p className="text-[11px] leading-relaxed">
+        <p className="text-xs leading-relaxed text-slate-600">
           Nuestra flota cuenta con salidas programadas desde Milwaukee hacia Laredo, Texas. Recomendamos empacar y acudir a tu tienda con al menos 2 días de anticipación sobre la fecha límite.
         </p>
       </div>

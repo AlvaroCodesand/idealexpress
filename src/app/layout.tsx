@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Libre_Baskerville, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, Libre_Baskerville, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SeasonAlert } from "@/components/layout/SeasonAlert";
 import { Navbar } from "@/components/layout/Navbar";
@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { LocalBusinessJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 
-const fontSans = Plus_Jakarta_Sans({
+const fontSans = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],

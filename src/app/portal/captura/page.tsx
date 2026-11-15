@@ -675,7 +675,7 @@ export default function CapturaEnvioPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#1E3A5F] hover:bg-[#152B47] disabled:opacity-50 text-white font-extrabold rounded-2xl text-sm uppercase tracking-wider transition shadow-lg active:scale-95 border-b-4 border-[#8FB838]"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#1E3A5F] hover:bg-[#152B47] disabled:opacity-50 text-white font-extrabold rounded-2xl text-sm uppercase tracking-wider transition shadow-lg active:scale-95"
           >
             <Printer size={20} className="text-[#8FB838]" />
             <span>{isSubmitting ? "Guardando en Microsoft 365..." : "Guardar Envío e Imprimir Hojas (2 Copias)"}</span>

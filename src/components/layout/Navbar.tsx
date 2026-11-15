@@ -81,7 +81,7 @@ export const Navbar: React.FC = () => {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-sm transition active:scale-95"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg shadow-sm transition active:scale-95"
             >
               <MessageCircle size={15} />
               <span>WhatsApp</span>
@@ -144,7 +144,7 @@ export const Navbar: React.FC = () => {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-3 px-4 text-xs uppercase tracking-wider font-bold text-white bg-emerald-600 rounded-lg shadow-sm"
+              className="flex items-center justify-center gap-2 py-3 px-4 text-xs uppercase tracking-wider font-bold text-white bg-emerald-700 rounded-lg shadow-sm"
             >
               <MessageCircle size={16} />
               <span>Escribir por WhatsApp</span>

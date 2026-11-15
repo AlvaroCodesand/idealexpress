@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { checkChristmasArrival } from "@/utils/calendar";
 import { HolidayCheckResult } from "@/types";
 import { TARIFF_CONFIG } from "@/constants/config";
-import { Calendar, CheckCircle2, AlertTriangle, HelpCircle, MessageCircle, Sparkles } from "lucide-react";
+import { Calendar, CheckCircle2, AlertTriangle, HelpCircle, MessageCircle } from "lucide-react";
 
 export const DeliveryDateChecker: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>("2026-11-28");
@@ -24,16 +24,10 @@ export const DeliveryDateChecker: React.FC = () => {
   return (
     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xs space-y-6">
       <div className="space-y-1.5 pb-3 border-b border-[#E8E1D5]">
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono font-bold text-[#7BA029] uppercase tracking-widest block">
-            VERIFICADOR LOGÍSTICO
-          </span>
-          <span className="text-[10px] font-mono text-slate-400">NOCHEBUENA 2026</span>
-        </div>
-        <h3 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
-          <Calendar size={22} className="text-[#7BA029]" />
+        <h2 className="font-serif text-2xl font-bold text-[#0E283F] flex items-center gap-2">
+          <Calendar size={22} className="text-[#3E5C10]" />
           <span>¿Llega a tiempo para Navidad?</span>
-        </h3>
+        </h2>
         <p className="text-xs text-slate-600">
           Elige la fecha en que llevarás tu caja al agente para corroborar si alcanza a llegar antes del 24 de diciembre.
         </p>
@@ -62,29 +56,29 @@ export const DeliveryDateChecker: React.FC = () => {
         </div>
       </form>
 
-      {/* Estados del resultado según el Wireframe */}
+      {/* Estados del resultado */}
       {result.status === "on-time" && (
         <div className="bg-[#EBF3DC] border-2 border-[#7BA029] rounded-2xl p-5 space-y-2 animate-in fade-in">
-          <div className="flex items-center justify-between">
-            <span className="px-3 py-1 bg-[#7BA029] text-white rounded-md text-[10px] font-mono font-black uppercase tracking-wider flex items-center gap-1.5 shadow-2xs">
+          <div className="flex items-center justify-between text-xs">
+            <span className="px-3 py-1 bg-[#3E5C10] text-white rounded-md font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
               <CheckCircle2 size={13} />
               A TIEMPO PARA NAVIDAD
             </span>
-            <span className="text-xs font-mono font-bold text-[#2D450D]">Garantía Confirmada</span>
+            <span className="font-mono font-bold text-[#2D450D]">Garantía Confirmada</span>
           </div>
           <p className="font-serif text-base font-bold text-[#2D450D] mt-1">{result.message}</p>
-          <p className="text-xs text-[#2D450D]/80 leading-relaxed font-sans">{result.subMessage}</p>
+          <p className="text-xs text-[#2D450D]/90 leading-relaxed font-sans">{result.subMessage}</p>
         </div>
       )}
 
       {result.status === "late" && (
-        <div className="bg-amber-50 border-2 border-amber-400 rounded-2xl p-5 space-y-3 animate-in fade-in">
-          <div className="flex items-center justify-between">
-            <span className="px-3 py-1 bg-amber-600 text-white rounded-md text-[10px] font-mono font-black uppercase tracking-wider flex items-center gap-1.5">
+        <div className="bg-amber-50 border-2 border-amber-500 rounded-2xl p-5 space-y-3 animate-in fade-in">
+          <div className="flex items-center justify-between text-xs">
+            <span className="px-3 py-1 bg-amber-700 text-white rounded-md font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
               <AlertTriangle size={13} />
               SUPERA LA FECHA LÍMITE
             </span>
-            <span className="text-xs font-mono font-bold text-amber-800">Tránsito Regular</span>
+            <span className="font-mono font-bold text-amber-900">Tránsito Regular</span>
           </div>
           <p className="font-serif text-base font-bold text-amber-950 mt-1">{result.message}</p>
           <p className="text-xs text-amber-900 leading-relaxed font-sans">{result.subMessage}</p>
@@ -92,7 +86,7 @@ export const DeliveryDateChecker: React.FC = () => {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition"
           >
             <MessageCircle size={15} />
             <span>Consultar Opciones por WhatsApp</span>
@@ -101,7 +95,7 @@ export const DeliveryDateChecker: React.FC = () => {
       )}
 
       {result.status === "unselected" && (
-        <div className="bg-[#FAF8F5] border border-[#E8E1D5] rounded-2xl p-5 text-center text-xs text-slate-500">
+        <div className="bg-[#FAF8F5] border border-[#E8E1D5] rounded-2xl p-5 text-center text-xs text-slate-600">
           <HelpCircle size={22} className="mx-auto text-slate-400 mb-1" />
           <p>{result.message}</p>
         </div>

@@ -19,7 +19,7 @@ export const WhatsAppFloat: React.FC = () => {
       href={waUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4.5 rounded-full shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group focus:outline-hidden"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-4.5 rounded-full shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group focus:outline-hidden"
       aria-label="Atención por WhatsApp"
     >
       <MessageCircle size={24} className="shrink-0" />

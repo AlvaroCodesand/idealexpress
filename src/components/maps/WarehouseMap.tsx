@@ -37,7 +37,7 @@ export const WarehouseMap: React.FC = () => {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-bold text-orange-600 hover:underline"
+          className="font-bold text-[#0E283F] hover:text-[#3E5C10] hover:underline"
         >
           Abrir en Google Maps ↗
         </a>

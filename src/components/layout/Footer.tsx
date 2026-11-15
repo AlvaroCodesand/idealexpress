@@ -99,17 +99,17 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Columna 4: Compromiso */}
-          <div className="bg-[#16334D] p-5 rounded-2xl border border-slate-700/60">
-            <div className="flex items-center gap-2 text-white font-semibold text-xs mb-2">
-              <HeartHandshake size={18} className="text-[#8FB838]" />
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-[#8FB838] pl-2 flex items-center gap-2">
+              <HeartHandshake size={15} className="text-[#8FB838]" />
               <span>Trato Familiar y Seguro</span>
-            </div>
-            <p className="text-[11px] text-slate-300 leading-normal">
+            </h4>
+            <p className="text-xs text-slate-400 leading-relaxed text-pretty">
               Sabemos el esfuerzo que hay detrás de cada caja. Su paquete viaja protegido hasta las manos de su destinatario a través de paqueterías líderes en México.
             </p>
-            <div className="mt-4 pt-3 border-t border-slate-600/60 text-[10px] text-slate-300">
+            <div className="pt-2 text-xs text-slate-300">
               WhatsApp de atención directa: <br />
-              <strong className="text-white text-xs">{TARIFF_CONFIG.whatsappDisplay}</strong>
+              <strong className="text-white font-mono text-sm">{TARIFF_CONFIG.whatsappDisplay}</strong>
             </div>
           </div>
         </div>

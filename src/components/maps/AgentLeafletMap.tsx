@@ -96,7 +96,7 @@ export default function AgentLeafletMap({
           <p style="color: #0f172a; font-weight: 600; margin: 0 0 6px 0;">Tel: ${agent.phone}</p>
           <a href="https://maps.google.com/?q=${encodeURIComponent(
             `${agent.storeName} ${agent.address} ${agent.city} ${agent.state}`
-          )}" target="_blank" style="color: #ea580c; font-weight: bold; text-decoration: none;">
+          )}" target="_blank" style="color: #0E283F; font-weight: bold; text-decoration: underline;">
             Cómo llegar →
           </a>
         </div>

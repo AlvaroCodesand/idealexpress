@@ -34,30 +34,30 @@ export const metadata: Metadata = {
 export default function ComoEnviarPage() {
   const steps = [
     {
-      num: 1,
-      title: "Lleva tu caja",
-      desc: "Al agente más cercano a ti en tu tienda hispana del barrio.",
+      num: "01",
+      title: "Lleva tu caja a la tienda",
+      desc: "Acude al comercio hispano aliado más cercano en tu barrio.",
       image: "/images/step1-pack.jpg",
       detail: "Usa cartón resistente y sella bien esquinas con cinta.",
     },
     {
-      num: 2,
-      title: "Llena el formato",
-      desc: "Tus datos, los de quien recibe y qué envías. Firmas de conformidad.",
+      num: "02",
+      title: "Llenado de datos en digital",
+      desc: "El encargado registra tus datos y los de tu familia en el sistema.",
       image: "/images/step2-counter.jpg",
-      detail: "Se registra en sistema digital y recibes tu copia oficial.",
+      detail: "Se entrega tu comprobante firmado con folio de rastreo.",
     },
     {
-      num: 3,
+      num: "03",
       title: "Nosotros la llevamos",
-      desc: "Pasa por nuestra bodega de Milwaukee y cruza segura a México en Texas.",
+      desc: "Pasa por nuestra bodega de Milwaukee y cruza segura en Texas.",
       image: "/images/step3-truck.jpg",
       detail: "Camiones propios con manifiesto aduanal legal.",
     },
     {
-      num: 4,
+      num: "04",
       title: "Tu familia la recibe",
-      desc: "Directamente en su domicilio en un plazo estipulado de 2 a 3 semanas.",
+      desc: "Directamente en su domicilio en un plazo habitual de 2 a 3 semanas.",
       image: "/images/step4-delivery.jpg",
       detail: "Entrega puerta a puerta sin trámites para tu familiar.",
     },
@@ -67,42 +67,39 @@ export default function ComoEnviarPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-16">
-      {/* 1. HEADER */}
+      {/* 1. HEADER (Sin kicker artificial) */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <span className="text-orange-600 text-xs font-bold uppercase tracking-widest">
-          Paso a Paso
-        </span>
-        <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+        <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#0E283F] tracking-tight text-balance">
           Cómo enviar tu paquete a México
         </h1>
-        <p className="text-base text-slate-600">
-          Es fácil y lo hacemos contigo, en tu tienda de confianza.
+        <p className="text-base text-slate-700 leading-relaxed text-pretty">
+          Un proceso ágil y transparente en tu tienda hispana de confianza, sin formatos confusos a mano.
         </p>
       </div>
 
-      {/* 2. LOS 4 PASOS EN 4 TARJETAS CON FOTOS REALES (PC 2 DEL WIREFRAME) */}
+      {/* 2. LOS 4 PASOS EN 4 TARJETAS CON FOTOS REALES */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {steps.map((step) => (
           <div
             key={step.num}
-            className="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs flex flex-col justify-between hover:shadow-md transition"
+            className="bg-white rounded-2xl border border-[#E8E1D5] overflow-hidden shadow-2xs flex flex-col justify-between hover:shadow-md transition"
           >
             <div>
-              <div className="relative h-48 w-full bg-stone-100">
+              <div className="relative h-48 w-full bg-slate-900">
                 <Image
                   src={step.image}
                   alt={step.title}
                   fill
                   className="object-cover"
                 />
-                <div className="absolute top-3 left-3 w-8 h-8 rounded-xl bg-orange-600 text-white font-black flex items-center justify-center text-sm shadow-md">
-                  {step.num}
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-[#0E283F] text-white font-mono font-bold text-xs shadow-xs">
+                  Paso {step.num}
                 </div>
               </div>
               <div className="p-5 space-y-2">
-                <h3 className="font-bold text-base text-slate-900">{step.title}</h3>
+                <h2 className="font-serif font-bold text-base text-[#0E283F]">{step.title}</h2>
                 <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
-                <p className="text-[11px] text-orange-700 font-medium pt-1">
+                <p className="text-xs text-[#3E5C10] font-semibold pt-1">
                   {step.detail}
                 </p>
               </div>
@@ -111,26 +108,23 @@ export default function ComoEnviarPage() {
         ))}
       </div>
 
-      {/* 3. BLOQUE: ¿YA TE DIERON TU NÚMERO DE GUÍA? (DEL WIREFRAME) */}
-      <div className="bg-white rounded-2xl p-6 sm:p-10 border border-stone-200 shadow-sm">
+      {/* 3. BLOQUE: ¿YA TE DIERON TU NÚMERO DE GUÍA? (Aplanado, sin nested card) */}
+      <div className="bg-white rounded-2xl p-6 sm:p-10 border border-[#E8E1D5] shadow-xs">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-3">
-            <span className="text-[11px] font-bold text-orange-600 uppercase tracking-widest block">
-              Rastreo de Paquetería
-            </span>
-            <h2 className="text-2xl font-black text-slate-900">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0E283F]">
               ¿Ya te dieron tu número de guía?
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty">
               La guía mexicana se asigna cuando tu carga cruza la aduana en Texas y se transfiere a la paquetería de última milla. El rastreo se consulta directamente en el portal oficial de la paquetería asignada.
             </p>
-            <p className="text-xs text-slate-500 pt-1">
+            <p className="text-xs text-slate-600 pt-1">
               ¿Dudas con tu número de guía?{" "}
               <a
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-emerald-600 hover:underline inline-flex items-center gap-1"
+                className="font-bold text-emerald-800 hover:underline inline-flex items-center gap-1"
               >
                 <MessageCircle size={14} />
                 <span>Escríbenos por WhatsApp</span>
@@ -138,12 +132,12 @@ export default function ComoEnviarPage() {
             </p>
           </div>
 
-          <div className="md:col-span-6 space-y-3 bg-stone-50 p-6 rounded-2xl border border-stone-200">
-            <span className="text-xs font-bold text-slate-700 block">
+          <div className="md:col-span-6 space-y-3 pt-2">
+            <span className="text-xs font-mono font-bold text-[#0E283F] block uppercase tracking-wider">
               Consulta en el portal de la paquetería aliada:
             </span>
             <CarrierTrackingButtons />
-            <p className="text-[11px] text-slate-400">
+            <p className="text-xs text-slate-500">
               * Cada botón abre el sitio oficial de rastreo de la paquetería en otra pestaña.
             </p>
           </div>
@@ -151,23 +145,23 @@ export default function ComoEnviarPage() {
       </div>
 
       {/* 4. BLOQUE: ¿CUÁNTO TARDA? */}
-      <div className="bg-gradient-to-r from-[#1E3A5F] to-[#0F2438] text-white rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md border-t-4 border-[#8FB838]">
+      <div className="bg-[#0E283F] text-white rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md border border-[#183D61]">
         <div className="space-y-1 text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start gap-2 text-[#8FB838] text-xs font-bold uppercase tracking-wider">
             <Clock size={16} />
             <span>Tiempo de Tránsito Garantizado</span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold">
             ¿Cuánto tarda en llegar?
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-300">
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-300 text-pretty">
             El tiempo habitual de entrega es de <strong className="text-white">2 a 3 semanas</strong> desde que lo entregas a tu agente.
           </p>
         </div>
 
         <Link
           href="/agentes"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-[#8FB838] hover:bg-[#7EA62F] text-[#0F2438] font-black rounded-xl text-xs uppercase tracking-wider transition shadow-lg shrink-0 active:scale-95"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-[#7BA029] hover:bg-[#6C8E24] text-[#0E283F] font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-sm shrink-0 active:scale-95"
         >
           <span>Encontrar agente cercano</span>
           <ArrowRight size={16} />
@@ -175,41 +169,41 @@ export default function ComoEnviarPage() {
       </div>
 
       {/* 5. REGULACIONES: PERMITIDOS VS RESTRINGIDOS */}
-      <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-10 shadow-xs space-y-8">
+      <div className="bg-white rounded-2xl border border-[#E8E1D5] p-6 sm:p-10 shadow-xs space-y-8">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 mb-1">
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0E283F] mb-1">
             Artículos Permitidos y Prohibidos en Aduana
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-slate-600">
             Revisar esta lista antes de empacar evitará revisiones especiales y demoras en el cruce de Texas.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-emerald-50/60 rounded-xl p-6 border border-emerald-200 space-y-4">
-            <div className="flex items-center gap-2 text-emerald-800 font-bold text-base">
-              <PackageCheck size={20} className="text-emerald-600" />
+          <div className="bg-[#FAF8F5] rounded-xl p-6 border border-[#E8E1D5] space-y-4">
+            <div className="flex items-center gap-2 text-[#3E5C10] font-bold text-base">
+              <PackageCheck size={20} className="text-[#3E5C10]" />
               <span>Artículos Permitidos</span>
             </div>
-            <ul className="space-y-2 text-xs text-slate-700">
+            <ul className="space-y-2.5 text-xs text-slate-700">
               {TARIFF_CONFIG.allowedItems.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <CheckCircle2 size={15} className="text-emerald-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 size={15} className="text-[#3E5C10] shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="bg-rose-50/60 rounded-xl p-6 border border-rose-200 space-y-4">
+          <div className="bg-[#FAF8F5] rounded-xl p-6 border border-[#E8E1D5] space-y-4">
             <div className="flex items-center gap-2 text-rose-800 font-bold text-base">
-              <ShieldAlert size={20} className="text-rose-600" />
+              <ShieldAlert size={20} className="text-rose-700" />
               <span>Artículos Prohibidos</span>
             </div>
-            <ul className="space-y-2 text-xs text-slate-700">
+            <ul className="space-y-2.5 text-xs text-slate-700">
               {TARIFF_CONFIG.prohibitedItems.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <XCircle size={15} className="text-rose-600 shrink-0 mt-0.5" />
+                  <XCircle size={15} className="text-rose-700 shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}

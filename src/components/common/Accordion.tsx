@@ -18,7 +18,7 @@ interface AccordionProps {
 export const Accordion: React.FC<AccordionProps> = ({
   items,
   defaultOpenId,
-  className = "space-y-3",
+  className = "divide-y divide-[#E8E1D5]",
 }) => {
   const [openId, setOpenId] = useState<string | null>(defaultOpenId || null);
 
@@ -31,23 +31,20 @@ export const Accordion: React.FC<AccordionProps> = ({
       {items.map((item) => {
         const isOpen = openId === item.id;
         return (
-          <div
-            key={item.id}
-            className="bg-white border border-stone-200 rounded-xl overflow-hidden transition-all shadow-xs"
-          >
+          <div key={item.id} className="py-3">
             <button
               type="button"
               onClick={() => toggle(item.id)}
-              className="w-full py-4 px-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-900 hover:text-orange-600 transition"
+              className="w-full text-left flex items-center justify-between gap-3 font-serif font-bold text-sm text-[#0E283F] hover:text-[#3E5C10] transition py-1"
               aria-expanded={isOpen}
             >
               <span>{item.title}</span>
-              <span className="w-7 h-7 rounded-full bg-stone-100 flex items-center justify-center shrink-0 text-slate-500">
-                {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+              <span className="w-6 h-6 flex items-center justify-center shrink-0 text-slate-600">
+                {isOpen ? <Minus size={15} /> : <Plus size={15} />}
               </span>
             </button>
             {isOpen && (
-              <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-stone-100 bg-stone-50/50">
+              <div className="pt-2 text-xs text-slate-700 leading-relaxed font-sans">
                 {item.content}
               </div>
             )}

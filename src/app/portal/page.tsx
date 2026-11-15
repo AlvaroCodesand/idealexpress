@@ -105,7 +105,7 @@ export default function PortalLoginPage() {
 
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-[#1E3A5F] hover:bg-[#152B47] text-white font-bold rounded-xl text-xs sm:text-sm uppercase tracking-wider transition shadow-md active:scale-95 border-b-2 border-[#8FB838]"
+            className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-[#1E3A5F] hover:bg-[#152B47] text-white font-bold rounded-xl text-xs sm:text-sm uppercase tracking-wider transition shadow-md active:scale-95"
           >
             <span>Ingresar al Sistema de Captura</span>
             <ArrowRight size={16} />
