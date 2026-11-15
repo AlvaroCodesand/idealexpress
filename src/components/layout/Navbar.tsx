@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Enlaces de Navegación */}
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-7 ml-auto mr-6">
             {navLinks.map((link) => {
               const active = pathname === link.href;
               return (
@@ -65,6 +65,9 @@ export const Navbar: React.FC = () => {
               );
             })}
           </div>
+
+          {/* Separador Vertical */}
+          <div className="hidden lg:block h-6 w-px bg-[#E8E1D5] mr-6"></div>
 
           {/* Botones de Acción */}
           <div className="hidden sm:flex items-center gap-3">

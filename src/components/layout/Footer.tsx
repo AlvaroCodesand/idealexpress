@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/contacto" className="hover:text-white transition">Bodega central y teléfonos</Link>
               </li>
-              <li>
+              <li className="pt-2 border-t border-slate-800">
                 <Link href="/portal" className="text-[#8FB838] hover:text-white font-semibold transition">
                   Acceso exclusivo para Agentes →
                 </Link>
