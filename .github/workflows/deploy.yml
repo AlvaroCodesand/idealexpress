@@ -46,9 +46,9 @@ jobs:
           # Transferir archivo docker-compose
           scp -i ~/.ssh/id_deploy docker-compose.yml "$TARGET_USER@$TARGET_HOST:~/idealexpress-app/docker-compose.yml"
 
-      - name: Restart Container
+      - name: Restart Container & Prune Old Images
         run: |
           TARGET_HOST="${{ secrets.SERVER_HOST || '15.235.41.249' }}"
           TARGET_USER="${{ secrets.SERVER_USER || 'ubuntu' }}"
           ssh -i ~/.ssh/id_deploy "$TARGET_USER@$TARGET_HOST" \
-            "cd ~/idealexpress-app && docker compose up -d --remove-orphans && docker compose ps"
+            "cd ~/idealexpress-app && docker compose up -d --remove-orphans && docker compose ps && docker image prune -f"
