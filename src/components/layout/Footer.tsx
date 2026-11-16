@@ -47,6 +47,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/" className="hover:text-white transition">Inicio</Link>
               </li>
+              {/* Preservados en código:
               <li>
                 <Link href="/como-enviar" className="hover:text-white transition">¿Cómo funciona el envío?</Link>
               </li>
@@ -56,6 +57,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/calendario" className="hover:text-white transition">Calendario Navideño</Link>
               </li>
+              */}
               <li>
                 <Link href="/agentes" className="hover:text-white transition">Directorio de tiendas aliadas</Link>
               </li>

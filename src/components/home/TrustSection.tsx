@@ -101,13 +101,15 @@ export const TrustAndFaqRow: React.FC = () => {
               <p className="text-xs text-slate-300 leading-relaxed text-pretty">
                 Aceptamos bultos de 30 a 140 libras para fácil manejo y protección del contenido.
               </p>
-              <Link
-                href="/tarifas"
+              <a
+                href={`https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20quisiera%20cotizar%20un%20envío%20a%20México.`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full py-3.5 text-center bg-white hover:bg-[#FAF8F5] text-[#0E283F] font-bold rounded-xl text-xs uppercase tracking-wider transition active:scale-95"
               >
-                <span>Ver medidas y calculadora</span>
+                <span>Cotizar mi caja por WhatsApp</span>
                 <ArrowRight size={14} className="text-[#3E5C10]" />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -128,10 +130,10 @@ export const TrustAndFaqRow: React.FC = () => {
 
             <div className="pt-4 border-t border-[#E8E1D5]">
               <Link
-                href="/como-enviar"
+                href="/contacto"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0E283F] hover:text-[#3E5C10] transition"
               >
-                <span>Ver guía completa de regulaciones</span>
+                <span>¿Tienes más preguntas? Contáctanos directamente</span>
                 <ArrowRight size={14} className="text-[#3E5C10]" />
               </Link>
             </div>

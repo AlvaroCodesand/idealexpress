@@ -122,10 +122,10 @@ export const HowItWorks: React.FC = () => {
           </div>
 
           <Link
-            href="/como-enviar"
+            href="/contacto"
             className="inline-flex items-center gap-1.5 font-bold text-[#0E283F] hover:text-[#3E5C10] transition shrink-0"
           >
-            <span>Ver detalles de aduana y empaque</span>
+            <span>¿Dudas sobre tu paquete? Contáctanos directamente</span>
             <ArrowRight size={15} className="text-[#3E5C10]" />
           </Link>
         </div>

@@ -17,11 +17,12 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { href: "/", label: "Inicio" },
-    { href: "/como-enviar", label: "Cómo enviar" },
-    { href: "/tarifas", label: "Servicios y Tarifas" },
-    { href: "/calendario", label: "Calendario Navideño" },
     { href: "/agentes", label: "Tiendas y Sucursales" },
     { href: "/contacto", label: "Contacto" },
+    // Preservadas en código (ocultas temporalmente de la navegación pública):
+    // { href: "/como-enviar", label: "Cómo enviar" },
+    // { href: "/tarifas", label: "Servicios y Tarifas" },
+    // { href: "/calendario", label: "Calendario Navideño" },
   ];
 
   const waUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20deseo%20información%20para%20enviar%20un%20paquete%20a%20México.`;

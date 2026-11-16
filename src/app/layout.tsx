@@ -123,7 +123,7 @@ export default function RootLayout({
         <FaqJsonLd />
       </head>
       <body className="min-h-full flex flex-col bg-[#FAF8F5] text-[#0A1928] font-sans selection:bg-[#7BA029] selection:text-white">
-        <SeasonAlert />
+        {/* <SeasonAlert /> Preservado en código */}
         <Suspense fallback={null}>
           <Navbar />
         </Suspense>

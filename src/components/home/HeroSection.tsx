@@ -97,14 +97,6 @@ export const HeroSection: React.FC = () => {
                 <MapPin size={16} className="text-[#8FB838]" />
                 <span>Buscar Tienda</span>
               </Link>
-
-              <Link
-                href="/tarifas"
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#0E283F] font-bold rounded-xl transition text-xs sm:text-sm"
-              >
-                <Package size={16} className="text-slate-600" />
-                <span>Ver Tarifas</span>
-              </Link>
             </div>
           </div>
         </div>
