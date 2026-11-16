@@ -112,6 +112,13 @@ export default function RootLayout({
       className={`${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable} h-full antialiased`}
     >
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-warehouse.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
         <LocalBusinessJsonLd />
         <FaqJsonLd />
       </head>

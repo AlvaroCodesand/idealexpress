@@ -16,6 +16,7 @@ export const HeroSection: React.FC = () => {
           alt="Bodega matriz de Ideal Express en Milwaukee"
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover object-right-top sm:object-center scale-105"
         />
