@@ -12,10 +12,11 @@ export const HeroSection: React.FC = () => {
       {/* 1. Fotografía Panorámica de Fondo con Velo Asimétrico Izquierda-Derecha */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-warehouse.jpg"
+          src="/images/hero-warehouse.webp"
           alt="Bodega matriz de Ideal Express en Milwaukee"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-right-top sm:object-center scale-105"
         />
         {/* Velo más sólido a la izquierda para texto y translúcido a la derecha */}

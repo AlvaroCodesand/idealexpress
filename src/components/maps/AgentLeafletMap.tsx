@@ -53,12 +53,12 @@ export default function AgentLeafletMap({
     Object.values(markersRef.current).forEach((m) => m.remove());
     markersRef.current = {};
 
-    // Crear icono personalizado SVG para los agentes
-    const createCustomIcon = (isSelected: boolean) =>
+    // Crear icono personalizado SVG para los agentes con nombre accesible
+    const createCustomIcon = (agentName: string, isSelected: boolean) =>
       L.divIcon({
         className: "custom-map-pin",
         html: `
-          <div style="
+          <div role="img" aria-label="Marcador: ${agentName}" style="
             width: ${isSelected ? "38px" : "30px"};
             height: ${isSelected ? "38px" : "30px"};
             background-color: ${isSelected ? "#8FB838" : "#1E3A5F"};
@@ -72,7 +72,7 @@ export default function AgentLeafletMap({
           ">
             <svg width="${isSelected ? "18" : "14"}" height="${
           isSelected ? "18" : "14"
-        }" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        }" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
@@ -82,12 +82,21 @@ export default function AgentLeafletMap({
         iconAnchor: [isSelected ? 19 : 15, isSelected ? 19 : 15],
       });
 
-    // Agregar marcadores para cada agente
+    // Agregar marcadores para cada agente con ARIA accesible para lectores e IA
     agents.forEach((agent) => {
       const isSelected = selectedAgentId === agent.id;
       const marker = L.marker([agent.lat, agent.lng], {
-        icon: createCustomIcon(isSelected),
+        icon: createCustomIcon(agent.storeName, isSelected),
+        title: `Tienda aliada: ${agent.storeName}, ${agent.city}`,
+        alt: `Ubicación de ${agent.storeName}`,
       }).addTo(map);
+
+      // Asignar el nombre accesible al botón interactivo de Leaflet
+      const markerEl = marker.getElement();
+      if (markerEl) {
+        markerEl.setAttribute("aria-label", `Tienda aliada: ${agent.storeName}, ${agent.city}`);
+        markerEl.setAttribute("title", `Tienda aliada: ${agent.storeName}, ${agent.city}`);
+      }
 
       const popupContent = `
         <div style="font-family: inherit; font-size: 12px; padding: 4px; max-width: 220px;" text-wrap: pretty;>
