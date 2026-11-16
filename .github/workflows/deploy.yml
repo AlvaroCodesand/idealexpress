@@ -1,0 +1,54 @@
+name: Deploy Ideal Express
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Production Image
+        run: |
+          docker build -t idealexpress-web:latest .
+
+      - name: Configure SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          TARGET_HOST="${{ secrets.SERVER_HOST || '15.235.41.249' }}"
+          ssh-keyscan -H "$TARGET_HOST" >> ~/.ssh/known_hosts
+
+      - name: Transfer Image & Compose
+        run: |
+          TARGET_HOST="${{ secrets.SERVER_HOST || '15.235.41.249' }}"
+          TARGET_USER="${{ secrets.SERVER_USER || 'ubuntu' }}"
+          SSH="ssh -i ~/.ssh/id_deploy $TARGET_USER@$TARGET_HOST"
+
+          # Crear directorio en el servidor
+          $SSH "mkdir -p ~/idealexpress-app"
+
+          # Transferir imagen construida comprimida por SSH
+          docker save idealexpress-web:latest | gzip | $SSH "gunzip | docker load"
+
+          # Transferir archivo docker-compose
+          scp -i ~/.ssh/id_deploy docker-compose.yml "$TARGET_USER@$TARGET_HOST:~/idealexpress-app/docker-compose.yml"
+
+      - name: Restart Container
+        run: |
+          TARGET_HOST="${{ secrets.SERVER_HOST || '15.235.41.249' }}"
+          TARGET_USER="${{ secrets.SERVER_USER || 'ubuntu' }}"
+          ssh -i ~/.ssh/id_deploy "$TARGET_USER@$TARGET_HOST" \
+            "cd ~/idealexpress-app && docker compose up -d --remove-orphans && docker compose ps"

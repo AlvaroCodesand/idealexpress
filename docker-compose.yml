@@ -1,0 +1,10 @@
+services:
+  web:
+    image: idealexpress-web:latest
+    container_name: idealexpress-web
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3005:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
