@@ -1,30 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { SEED_CLIENTS } from "@/constants/seedData";
+import { searchClientsFromDb } from "@/lib/db";
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const query = (searchParams.get("q") || "").trim().toLowerCase();
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const query = (searchParams.get("q") || "").trim();
 
-  if (query.length < 3) {
+    // Consulta en SQLite modo WAL (< 1ms)
+    const results = searchClientsFromDb(query);
+
     return NextResponse.json({
       success: true,
-      data: [],
-      message: "Ingrese al menos 3 caracteres para buscar en el historial.",
+      total: results.length,
+      data: results,
     });
+  } catch (err) {
+    console.error("Error en /api/historial", err);
+    return NextResponse.json(
+      { success: false, error: "Error al consultar historial de clientes" },
+      { status: 500 }
+    );
   }
-
-  // Filtrar por nombre completo o por teléfono
-  const results = SEED_CLIENTS.filter((client) => {
-    const cleanPhone = client.phone.replace(/\D/g, "");
-    const cleanQuery = query.replace(/\D/g, "");
-    const matchesName = client.fullName.toLowerCase().includes(query);
-    const matchesPhone = cleanQuery.length >= 3 && cleanPhone.includes(cleanQuery);
-    return matchesName || matchesPhone;
-  });
-
-  return NextResponse.json({
-    success: true,
-    total: results.length,
-    data: results,
-  });
 }

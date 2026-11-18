@@ -16,7 +16,7 @@ export const TARIFF_CONFIG: TariffConfig = {
   pricePerPound: 2.99,
   minPounds: 15,
   minPriceUSD: 44.85,
-  insurancePercentage: 0.1,
+  insurancePercentage: 0.05, // 5% oficial según Forma de Envío física
   minInsuranceUSD: 5.0,
   maxDeclaredValueUSD: 2000,
   christmasDeadlineDate: "2026-12-02",

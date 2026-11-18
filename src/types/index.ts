@@ -14,10 +14,12 @@ export interface Agent {
 }
 
 export interface Recipient {
-  id: string;
-  clientId: string;
+  id?: string;
+  clientId?: string;
   fullName: string;
   phone: string;
+  phone2?: string;
+  deliveryType?: "Domicilio" | "Oficina de Estafeta";
   street: string;
   colonia: string;
   city: string;
@@ -38,6 +40,7 @@ export interface Client {
 }
 
 export interface PackageDetails {
+  serviceType?: "Regular" | "Plus" | "Express";
   weightLbs: number;
   boxSize: string;
   declaredContent: string;
@@ -45,6 +48,12 @@ export interface PackageDetails {
   declaredValueUSD: number;
   shippingCostUSD: number;
   insuranceCostUSD: number;
+  boxPriceUSD?: number;
+  tvSizeInches?: string;
+  tvPriceUSD?: number;
+  discountUSD?: number;
+  boxNumber?: string;
+  date?: string;
   totalUSD: number;
 }
 
@@ -65,7 +74,10 @@ export interface Shipment {
   recipient: {
     fullName: string;
     phone: string;
+    phone2?: string;
+    deliveryType?: "Domicilio" | "Oficina de Estafeta";
     address: string;
+    colonia?: string;
     city: string;
     state: string;
     zip: string;

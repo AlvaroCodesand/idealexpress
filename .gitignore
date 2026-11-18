@@ -45,3 +45,7 @@ Formulario*
 *.docx
 documentacion/
 docs/
+
+# sqlite local database
+/data/*.db*
+/data/

@@ -64,5 +64,11 @@
 
 ## 📱 Módulos y Portal de Agentes (`/portal`)
 - **PINs de demostración:** `ideal2026`, `rivera123`, `jimenez88`, `luisito77`.
-- **Formulario Inteligente (`/portal/captura`):** Búsqueda reactiva de remitentes (ej. "Juan", "414") y carga de destinatarios frecuentes en México.
+- **Estrategia de Persistencia (SQLite Dual):**
+  - Base de datos relacional ligera en disco (`data/idealexpress.db`), mapeada en volumen de Docker para persistir entre despliegues.
+  - **Doble propósito:** 
+    1. Guardado de envíos completos (Número de caja, folio, desglose manual, QR autocontenido, estatus).
+    2. Alimentación automática del autocompletado histórico de clientes y destinatarios frecuentes para que el sistema aprenda con cada envío.
+  - **Pantalla de Búsqueda y Manifiesto (`/portal/envios`):** Búsqueda por número de caja, folio o destinatario, filtro por tienda y reimpresión de recibos/etiquetas QR.
+- **Formulario Inteligente (`/portal/captura`):** Llenado a mano oficial idéntico al papel físico con búsqueda predictiva de clientes y selección de destinatarios en 1 clic.
 - **Plantilla de Impresión Tamaño Carta (`/portal/impresion/[id]`):** Hoja 1 para cliente con firma y términos (plazo 2-3 semanas) y Hoja 2 etiqueta para caja con Código QR.

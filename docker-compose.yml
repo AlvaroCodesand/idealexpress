@@ -5,9 +5,12 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:3200:3000"
+    volumes:
+      - ./data:/app/data
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - DATA_DIR=/app/data
     deploy:
       resources:
         limits:

@@ -1,57 +1,79 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Shipment } from "@/types";
-import { INITIAL_SHIPMENTS } from "@/constants/seedData";
+import { saveShipmentToDb, getShipmentFromDb, getAllShipmentsFromDb } from "@/lib/db";
 
-// Memoria volátil para el demo de la sesión
-const shipmentsStore: Shipment[] = [...INITIAL_SHIPMENTS];
-
+// GET: Consultar un envío específico o buscar en el manifiesto general
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const id = searchParams.get("id");
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const id = searchParams.get("id");
+    const q = searchParams.get("q") || undefined;
+    const agentId = searchParams.get("agentId") || undefined;
 
-  if (id) {
-    const shipment = shipmentsStore.find((s) => s.id === id || s.folio === id);
-    if (!shipment) {
-      return NextResponse.json(
-        { success: false, error: "Envío no encontrado" },
-        { status: 404 }
-      );
+    if (id) {
+      const shipment = getShipmentFromDb(id);
+      if (!shipment) {
+        return NextResponse.json(
+          { success: false, error: "Envío no encontrado" },
+          { status: 404 }
+        );
+      }
+      return NextResponse.json({ success: true, data: shipment });
     }
-    return NextResponse.json({ success: true, data: shipment });
-  }
 
-  return NextResponse.json({ success: true, data: shipmentsStore });
+    // Listar y filtrar envíos
+    const shipments = getAllShipmentsFromDb(q, agentId);
+    return NextResponse.json({
+      success: true,
+      total: shipments.length,
+      data: shipments,
+    });
+  } catch (err) {
+    console.error("Error en GET /api/envios", err);
+    return NextResponse.json(
+      { success: false, error: "Error al consultar envíos" },
+      { status: 500 }
+    );
+  }
 }
 
+// POST: Registrar nueva caja, folio y sincronizar cliente/destinatario
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const count = shipmentsStore.length + 102;
-    const newFolio = `IE-2026-B${count}`;
-    const newId = `SHIP-${Date.now().toString().slice(-4)}`;
+
+    // Generar folio único secuencial si no viene
+    const nextFolioNum = 100 + Math.floor(Math.random() * 900);
+    const folio = `IE-2026-B${nextFolioNum}`;
+    const id = `SHIP-${Date.now().toString().slice(-6)}`;
 
     const newShipment: Shipment = {
-      id: newId,
-      folio: newFolio,
+      id,
+      folio,
       createdAt: new Date().toISOString(),
       agentId: body.agentId || "AG-01",
       agentName: body.agentName || "El Correcaminos Multiservicios",
       sender: body.sender,
       recipient: body.recipient,
-      packageDetails: body.packageDetails,
+      packageDetails: {
+        ...body.packageDetails,
+        boxNumber: body.packageDetails?.boxNumber || `BC-${nextFolioNum}`,
+      },
       status: "Recibido en Tienda",
     };
 
-    shipmentsStore.unshift(newShipment);
+    // Guardar en SQLite y ejecutar Upsert automático en clientes
+    saveShipmentToDb(newShipment);
 
     return NextResponse.json({
       success: true,
-      message: "Envío registrado con éxito en Microsoft Lists (simulado)",
+      message: "Envío registrado con éxito en la base de datos",
       data: newShipment,
     });
-  } catch {
+  } catch (err) {
+    console.error("Error en POST /api/envios", err);
     return NextResponse.json(
-      { success: false, error: "Error al procesar el envío" },
+      { success: false, error: "Error al registrar el envío en la base de datos" },
       { status: 400 }
     );
   }
