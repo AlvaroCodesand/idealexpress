@@ -14,13 +14,23 @@ function initDatabase(): Database.Database {
     return globalForDb.idealDb;
   }
 
-  // Carpeta data/ en la raíz del proyecto
-  const dataDir = path.join(process.cwd(), "data");
-  if (!fs.existsSync(/*turbopackIgnore: true*/ dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
+  let dbPath = "";
+  const preferredDir = process.env.DATA_DIR || path.join(process.cwd(), "data");
+
+  try {
+    if (!fs.existsSync(/*turbopackIgnore: true*/ preferredDir)) {
+      fs.mkdirSync(preferredDir, { recursive: true, mode: 0o777 });
+    }
+    // Probar permiso de escritura antes de abrir SQLite
+    const testFile = path.join(preferredDir, ".perm-test");
+    fs.writeFileSync(testFile, "ok");
+    fs.unlinkSync(testFile);
+    dbPath = path.join(preferredDir, "ideal.db");
+  } catch (permErr) {
+    console.warn("Sin permisos en dataDir, usando fallback seguro a /tmp:", permErr);
+    dbPath = path.join("/tmp", "ideal.db");
   }
 
-  const dbPath = path.join(dataDir, "ideal.db");
   const db = new Database(dbPath);
 
   // Modo WAL para máximo rendimiento concurrente (Google standard)

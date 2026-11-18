@@ -37,8 +37,8 @@ jobs:
           TARGET_USER="${{ secrets.SERVER_USER || 'ubuntu' }}"
           SSH="ssh -i ~/.ssh/id_deploy $TARGET_USER@$TARGET_HOST"
 
-          # Crear directorio en el servidor
-          $SSH "mkdir -p ~/idealexpress-app"
+          # Crear directorios en el servidor con permisos de escritura para Docker
+          $SSH "mkdir -p ~/idealexpress-app/data && chmod -R 777 ~/idealexpress-app/data"
 
           # Transferir imagen construida comprimida por SSH
           docker save idealexpress-web:latest | gzip | $SSH "gunzip | docker load"
@@ -51,4 +51,4 @@ jobs:
           TARGET_HOST="${{ secrets.SERVER_HOST || '15.235.41.249' }}"
           TARGET_USER="${{ secrets.SERVER_USER || 'ubuntu' }}"
           ssh -i ~/.ssh/id_deploy "$TARGET_USER@$TARGET_HOST" \
-            "cd ~/idealexpress-app && docker compose up -d --remove-orphans && docker compose ps && docker image prune -f"
+            "mkdir -p ~/idealexpress-app/data && chmod -R 777 ~/idealexpress-app/data && cd ~/idealexpress-app && docker compose up -d --remove-orphans && docker compose ps && docker image prune -f"
