@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { TARIFF_CONFIG } from "@/constants/config";
-import { MessageCircle, MapPin, Package, ArrowRight, ShieldCheck } from "lucide-react";
+import { MessageCircle, MapPin, ShieldCheck } from "lucide-react";
 
 export const HeroSection: React.FC = () => {
   const waUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20quisiera%20cotizar%20un%20envío%20a%20México.`;

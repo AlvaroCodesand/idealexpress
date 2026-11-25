@@ -6,9 +6,7 @@ import { calculateShipmentCost } from "@/utils/pricing";
 import {
   MessageCircle,
   Clock,
-  ShieldCheck,
   Info,
-  Check,
 } from "lucide-react";
 
 export default function TarifasClient() {

@@ -14,7 +14,10 @@ export async function GET(request: NextRequest) {
       total: results.length,
       data: results,
     });
-  } catch (err) {
+  } catch (err: unknown) {
+    if (typeof err === "object" && err !== null && "digest" in err && (err as { digest?: string }).digest === "NEXT_PRERENDER_INTERRUPTED") {
+      throw err;
+    }
     console.error("Error en /api/historial", err);
     return NextResponse.json(
       { success: false, error: "Error al consultar historial de clientes" },

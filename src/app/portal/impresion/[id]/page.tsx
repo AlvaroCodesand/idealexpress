@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, useMemo, Suspense } from "react";
+import Image from "next/image";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Shipment } from "@/types";
 import { INITIAL_SHIPMENTS } from "@/constants/seedData";
@@ -16,21 +17,23 @@ function ImpresionEnvioContent() {
   const shipmentId = params?.id as string;
   const encodedParam = searchParams.get("d");
 
-  const [shipment, setShipment] = useState<Shipment | null>(null);
-  const [loading, setLoading] = useState(true);
+  const initialShipment = useMemo(() => {
+    if (encodedParam) {
+      return decodeShipmentFromQR(encodedParam);
+    }
+    return null;
+  }, [encodedParam]);
+
+  const [shipment, setShipment] = useState<Shipment | null>(initialShipment);
+  const [loading, setLoading] = useState(!initialShipment);
 
   useEffect(() => {
-    // 1. Si viene el parámetro ?d=..., decodificar y reconstruir la hoja de inmediato
-    if (encodedParam) {
-      const reconstructed = decodeShipmentFromQR(encodedParam);
-      if (reconstructed) {
-        setShipment(reconstructed);
-        setLoading(false);
-        return;
-      }
+    // Si ya fue reconstruido directamente desde el parámetro QR (?d=...), no se requiere consulta
+    if (initialShipment) {
+      return;
     }
 
-    // 2. Consulta a la API como respaldo si no viene ?d=
+    // Consulta a la API como respaldo si no viene ?d=
     async function loadShipment() {
       try {
         const res = await fetch(`/api/envios?id=${encodeURIComponent(shipmentId)}`);
@@ -49,7 +52,7 @@ function ImpresionEnvioContent() {
     }
 
     loadShipment();
-  }, [shipmentId, encodedParam]);
+  }, [shipmentId, initialShipment]);
 
   if (loading) {
     return (
@@ -124,9 +127,13 @@ function ImpresionEnvioContent() {
             {/* Header Oficial con Barra Azul y Logo */}
             <div className="bg-[#0E283F] text-white p-4 rounded-lg flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src="/logo.png"
                   alt="Ideal Express Paquetería"
+                  width={140}
+                  height={36}
+                  unoptimized
+                  priority
                   className="h-9 w-auto object-contain bg-white p-1 rounded"
                 />
                 <div>
@@ -435,9 +442,13 @@ function ImpresionEnvioContent() {
           <div className="space-y-6">
             <div className="border-4 border-slate-950 p-4 rounded-xl flex items-center justify-between bg-stone-100">
               <div className="flex items-center gap-4">
-                <img
+                <Image
                   src="/logo.png"
                   alt="Ideal Express"
+                  width={150}
+                  height={40}
+                  unoptimized
+                  priority
                   className="h-10 w-auto object-contain"
                 />
                 <div>

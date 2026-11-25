@@ -1,5 +1,4 @@
 import React from "react";
-import { TARIFF_CONFIG } from "@/constants/config";
 import { Clock, ShieldCheck } from "lucide-react";
 
 export const ServiceDeadlinesTable: React.FC = () => {

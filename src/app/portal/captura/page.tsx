@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSyncExternalStore, Suspense } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Agent, Client, Recipient } from "@/types";
@@ -20,37 +20,37 @@ import {
   Calculator,
 } from "lucide-react";
 
-export default function CapturaEnvioPage() {
-  const router = useRouter();
-  const [activeAgent, setActiveAgent] = useState<Agent>(SEED_AGENTS[0]);
+function subscribeToStorage(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
 
-  useEffect(() => {
+function getActiveAgentSnapshot(): Agent {
+  if (typeof window === "undefined") return SEED_AGENTS[0];
+  try {
     const saved = localStorage.getItem("ideal_active_agent");
-    if (saved) {
-      try {
-        setActiveAgent(JSON.parse(saved));
-      } catch {
-        // default
-      }
-    }
-  }, []);
+    if (saved) return JSON.parse(saved);
+  } catch {}
+  return SEED_AGENTS[0];
+}
+
+function CapturaEnvioContent() {
+  const router = useRouter();
+  const activeAgent = useSyncExternalStore(
+    subscribeToStorage,
+    getActiveAgentSnapshot,
+    () => SEED_AGENTS[0]
+  );
 
   // 1. Control y Encabezado de la Forma (Llenado a Mano)
-  const [agentNameInput, setAgentNameInput] = useState<string>("El Correcaminos Multiservicios");
+  const [customAgentName, setCustomAgentName] = useState<string | null>(null);
+  const agentNameInput = customAgentName ?? activeAgent.storeName;
   const [boxNumber, setBoxNumber] = useState<string>("BC-1306");
-  const [date, setDate] = useState<string>("");
-
-  useEffect(() => {
+  const [date, setDate] = useState<string>(() => {
     const today = new Date();
-    const formatted = `${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`;
-    setDate(formatted);
-  }, []);
-
-  useEffect(() => {
-    if (activeAgent?.storeName) {
-      setAgentNameInput(activeAgent.storeName);
-    }
-  }, [activeAgent]);
+    return `${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`;
+  });
 
   // 2. Quién Envía (Remitente en EE. UU.) con Autopopulate inteligente
   const [searchQuery, setSearchQuery] = useState("");
@@ -150,27 +150,34 @@ export default function CapturaEnvioPage() {
   // Consulta predictiva a la API para autollenar Remitente
   useEffect(() => {
     if (searchQuery.trim().length < 3) {
-      setSearchResults([]);
       return;
     }
 
+    let isMounted = true;
     const timer = setTimeout(async () => {
       setIsSearching(true);
       try {
         const res = await fetch(`/api/historial?q=${encodeURIComponent(searchQuery)}`);
         const json = await res.json();
-        if (json.success) {
+        if (isMounted && json.success) {
           setSearchResults(json.data);
         }
       } catch (err) {
         console.error(err);
       } finally {
-        setIsSearching(false);
+        if (isMounted) {
+          setIsSearching(false);
+        }
       }
     }, 250);
 
-    return () => clearTimeout(timer);
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, [searchQuery]);
+
+  const visibleSearchResults = searchQuery.trim().length >= 3 ? searchResults : [];
 
   const handleSelectClient = (client: Client) => {
     setSelectedClient(client);
@@ -210,6 +217,7 @@ export default function CapturaEnvioPage() {
   const handleClearForm = () => {
     setSelectedClient(null);
     setSearchQuery("");
+    setCustomAgentName(null);
     setBoxNumber("BC-" + Math.floor(1000 + Math.random() * 9000));
     setSender({
       fullName: "",
@@ -411,7 +419,7 @@ export default function CapturaEnvioPage() {
                 type="text"
                 required
                 value={agentNameInput}
-                onChange={(e) => setAgentNameInput(e.target.value)}
+                onChange={(e) => setCustomAgentName(e.target.value)}
                 placeholder="Nombre del Agente o Tienda"
                 className="w-full px-3 py-1.5 text-xs font-bold border-b-2 border-stone-400 focus:border-black bg-transparent focus:outline-hidden"
               />
@@ -466,12 +474,12 @@ export default function CapturaEnvioPage() {
             </div>
 
             {/* Dropdown de Clientes */}
-            {searchResults.length > 0 && (
+            {visibleSearchResults.length > 0 && (
               <div className="absolute z-20 left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-xl overflow-hidden max-h-60 overflow-y-auto">
                 <div className="p-2 bg-stone-100 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
-                  Clientes encontrados en el historial ({searchResults.length})
+                  Clientes encontrados en el historial ({visibleSearchResults.length})
                 </div>
-                {searchResults.map((cli) => (
+                {visibleSearchResults.map((cli) => (
                   <button
                     key={cli.id}
                     type="button"
@@ -1099,5 +1107,19 @@ export default function CapturaEnvioPage() {
         </div>
       </form>
     </div>
+  );
+}
+
+export default function CapturaEnvioPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center p-6 text-slate-600 font-sans">
+          Cargando formulario de captura...
+        </div>
+      }
+    >
+      <CapturaEnvioContent />
+    </Suspense>
   );
 }

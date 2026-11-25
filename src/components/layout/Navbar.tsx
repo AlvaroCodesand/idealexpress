@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { TARIFF_CONFIG } from "@/constants/config";
-import { Menu, X, MessageCircle, Lock, Sparkles } from "lucide-react";
+import { Menu, X, MessageCircle, Lock } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

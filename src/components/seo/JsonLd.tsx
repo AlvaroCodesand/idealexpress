@@ -1,5 +1,5 @@
 import React from "react";
-import { TARIFF_CONFIG, APP_CONFIG } from "@/constants/config";
+import { APP_CONFIG } from "@/constants/config";
 
 export const LocalBusinessJsonLd: React.FC = () => {
   const schema = {

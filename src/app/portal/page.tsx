@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { SEED_AGENTS } from "@/constants/seedData";
 import { Agent } from "@/types";
-import { Lock, Store, KeyRound, ArrowRight, ShieldCheck, Info } from "lucide-react";
+import { Store, KeyRound, ArrowRight, ShieldCheck, Info } from "lucide-react";
 
 export default function PortalLoginPage() {
   const router = useRouter();
@@ -41,9 +42,12 @@ export default function PortalLoginPage() {
         {/* Cabecera */}
         <div className="text-center space-y-3">
           <div className="relative h-12 w-48 mx-auto mb-2">
-            <img
+            <Image
               src="/logo.png"
               alt="Ideal Express"
+              width={192}
+              height={40}
+              priority
               className="h-10 w-auto object-contain mx-auto"
             />
           </div>

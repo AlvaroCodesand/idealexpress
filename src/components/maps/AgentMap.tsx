@@ -23,13 +23,17 @@ const DynamicLeafletMap = dynamic(() => import("./AgentLeafletMap"), {
 });
 
 export const AgentMap: React.FC<AgentMapProps> = (props) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window !== "undefined" && !("IntersectionObserver" in window)) {
+      return true;
+    }
+    return false;
+  });
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Si IntersectionObserver no está soportado, cargar de inmediato
+    // Si IntersectionObserver no está soportado, ya fue resuelto en el estado inicial
     if (!("IntersectionObserver" in window)) {
-      setIsVisible(true);
       return;
     }
 

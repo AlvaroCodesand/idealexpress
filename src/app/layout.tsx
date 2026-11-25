@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Archivo, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { SeasonAlert } from "@/components/layout/SeasonAlert";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";

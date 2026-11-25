@@ -28,7 +28,10 @@ export async function GET(request: NextRequest) {
       total: shipments.length,
       data: shipments,
     });
-  } catch (err) {
+  } catch (err: unknown) {
+    if (typeof err === "object" && err !== null && "digest" in err && (err as { digest?: string }).digest === "NEXT_PRERENDER_INTERRUPTED") {
+      throw err;
+    }
     console.error("Error en GET /api/envios", err);
     return NextResponse.json(
       { success: false, error: "Error al consultar envíos" },

@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Shipment, Agent } from "@/types";
+import { Shipment } from "@/types";
 import { SEED_AGENTS } from "@/constants/seedData";
 import {
   Search,
@@ -12,34 +11,15 @@ import {
   FileSpreadsheet,
   Package,
   Store,
-  MapPin,
-  Calendar,
-  Phone,
-  ArrowRight,
   ExternalLink,
   MessageCircle,
-  Truck,
-  RotateCcw,
 } from "lucide-react";
 
 export default function ManifiestoEnviosPage() {
-  const router = useRouter();
-  const [activeAgent, setActiveAgent] = useState<Agent>(SEED_AGENTS[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [agentFilter, setAgentFilter] = useState("todos");
   const [shipments, setShipments] = useState<Shipment[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("ideal_active_agent");
-    if (saved) {
-      try {
-        setActiveAgent(JSON.parse(saved));
-      } catch {
-        // default
-      }
-    }
-  }, []);
 
   const loadShipments = async (q = "", agent = "todos") => {
     setLoading(true);
