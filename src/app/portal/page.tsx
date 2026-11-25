@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { SEED_AGENTS } from "@/constants/seedData";
@@ -9,30 +9,52 @@ import { Store, KeyRound, ArrowRight, ShieldCheck, Info } from "lucide-react";
 
 export default function PortalLoginPage() {
   const router = useRouter();
+  const [agents, setAgents] = useState<Agent[]>(SEED_AGENTS);
   const [selectedAgentId, setSelectedAgentId] = useState<string>(SEED_AGENTS[0].id);
   const [pin, setPin] = useState<string>("ideal2026");
   const [error, setError] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    fetch("/api/agentes")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          setAgents(json.data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const agent = SEED_AGENTS.find((a) => a.id === selectedAgentId);
-    if (!agent) {
-      setError("Por favor seleccione un agente válido.");
-      return;
-    }
+    setIsSubmitting(true);
+    setError("");
 
-    if (agent.pin !== pin.trim()) {
-      setError("Clave o PIN incorrecto. Revisa las credenciales de prueba abajo.");
-      return;
-    }
+    try {
+      const res = await fetch("/api/agentes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ agentId: selectedAgentId, pin: pin.trim() }),
+      });
 
-    localStorage.setItem("ideal_active_agent", JSON.stringify(agent));
-    router.push("/portal/captura");
+      const json = await res.json();
+      if (!json.success || !json.data) {
+        setError(json.error || "Clave o PIN incorrecto.");
+        return;
+      }
+
+      localStorage.setItem("ideal_active_agent", JSON.stringify(json.data));
+      router.push("/portal/captura");
+    } catch {
+      setError("Error de conexión al validar credenciales.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSelectQuickAgent = (agent: Agent) => {
     setSelectedAgentId(agent.id);
-    setPin(agent.pin);
     setError("");
   };
 
@@ -75,13 +97,13 @@ export default function PortalLoginPage() {
               value={selectedAgentId}
               onChange={(e) => {
                 setSelectedAgentId(e.target.value);
-                const ag = SEED_AGENTS.find((a) => a.id === e.target.value);
+                const ag = agents.find((a) => a.id === e.target.value);
                 if (ag) setPin(ag.pin);
                 setError("");
               }}
               className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-stone-300 rounded-xl focus:ring-2 focus:ring-[#1E3A5F] bg-white"
             >
-              {SEED_AGENTS.map((agent) => (
+              {agents.map((agent) => (
                 <option key={agent.id} value={agent.id}>
                   {agent.storeName} ({agent.city})
                 </option>
@@ -109,9 +131,10 @@ export default function PortalLoginPage() {
 
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-[#1E3A5F] hover:bg-[#152B47] text-white font-bold rounded-xl text-xs sm:text-sm uppercase tracking-wider transition shadow-md active:scale-95"
+            disabled={isSubmitting}
+            className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-[#1E3A5F] hover:bg-[#152B47] disabled:opacity-50 text-white font-bold rounded-xl text-xs sm:text-sm uppercase tracking-wider transition shadow-md active:scale-95"
           >
-            <span>Ingresar al Sistema de Captura</span>
+            <span>{isSubmitting ? "Validando..." : "Ingresar al Sistema de Captura"}</span>
             <ArrowRight size={16} />
           </button>
         </form>
@@ -120,13 +143,13 @@ export default function PortalLoginPage() {
         <div className="pt-4 border-t border-stone-100 bg-stone-50 p-4 rounded-xl text-xs space-y-2">
           <div className="flex items-center gap-1.5 text-slate-800 font-bold">
             <Info size={14} className="text-orange-600" />
-            <span>Accesos rápidos de demostración:</span>
+            <span>Selección rápida de tienda:</span>
           </div>
           <p className="text-[11px] text-slate-500">
-            Haz clic en cualquiera para autocompletar las credenciales:
+            Haz clic en tu sucursal e ingresa tu PIN de acceso:
           </p>
-          <div className="space-y-1.5 pt-1">
-            {SEED_AGENTS.map((agent) => (
+          <div className="space-y-1.5 pt-1 max-h-48 overflow-y-auto">
+            {agents.map((agent) => (
               <button
                 key={agent.id}
                 type="button"
@@ -138,7 +161,7 @@ export default function PortalLoginPage() {
                 }`}
               >
                 <span>{agent.storeName}</span>
-                <code className="text-slate-500 font-mono text-[10px]">{agent.pin}</code>
+                <span className="text-slate-400 font-mono text-[10px]">{agent.city}</span>
               </button>
             ))}
           </div>
@@ -146,7 +169,7 @@ export default function PortalLoginPage() {
 
         <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400">
           <ShieldCheck size={14} className="text-emerald-600" />
-          <span>Conexión segura con Microsoft 365 Lists</span>
+          <span>Validación segura y cifrada contra base de datos</span>
         </div>
       </div>
     </div>

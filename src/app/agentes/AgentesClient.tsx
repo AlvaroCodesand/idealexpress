@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Agent } from "@/types";
 import { SEED_AGENTS } from "@/constants/seedData";
 import { TARIFF_CONFIG } from "@/constants/config";
 import { AgentMap } from "@/components/maps/AgentMap";
@@ -14,12 +15,17 @@ import {
   Navigation,
 } from "lucide-react";
 
-export default function AgentesClient() {
+interface AgentesClientProps {
+  initialAgents?: Agent[];
+}
+
+export default function AgentesClient({ initialAgents }: AgentesClientProps) {
+  const allAgents = initialAgents && initialAgents.length > 0 ? initialAgents : SEED_AGENTS;
   const [filterCity, setFilterCity] = useState<string>("todos");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedAgentId, setSelectedAgentId] = useState<string | null>(SEED_AGENTS[0].id);
+  const [selectedAgentId, setSelectedAgentId] = useState<string | null>(allAgents[0]?.id || null);
 
-  const filteredAgents = SEED_AGENTS.filter((agent) => {
+  const filteredAgents = allAgents.filter((agent) => {
     const matchesCity =
       filterCity === "todos" || agent.city.toLowerCase() === filterCity.toLowerCase();
     const query = searchQuery.toLowerCase().trim();
@@ -32,7 +38,7 @@ export default function AgentesClient() {
     return matchesCity && matchesSearch;
   });
 
-  const cities = ["todos", ...Array.from(new Set(SEED_AGENTS.map((a) => a.city)))];
+  const cities = ["todos", ...Array.from(new Set(allAgents.map((a) => a.city)))];
   const waAgentUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20tengo%20un%20negocio%20y%20me%20gustaría%20ser%20agente%20de%20Ideal%20Express.`;
 
   return (

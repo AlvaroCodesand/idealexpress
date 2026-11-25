@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import { getAllAgentsFromDb } from "@/lib/db";
 import AgentesClient from "./AgentesClient";
 
 export const metadata: Metadata = {
@@ -23,5 +24,6 @@ export const metadata: Metadata = {
 };
 
 export default function AgentesPage() {
-  return <AgentesClient />;
+  const agents = getAllAgentsFromDb();
+  return <AgentesClient initialAgents={agents} />;
 }

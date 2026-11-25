@@ -1,8 +1,8 @@
 import Database from "better-sqlite3";
 import path from "path";
 import fs from "fs";
-import { Client, Recipient, Shipment } from "@/types";
-import { SEED_CLIENTS, INITIAL_SHIPMENTS } from "@/constants/seedData";
+import { Agent, Client, Recipient, Shipment } from "@/types";
+import { SEED_CLIENTS, INITIAL_SHIPMENTS, SEED_AGENTS } from "@/constants/seedData";
 
 // Singleton para Next.js en desarrollo y producción
 const globalForDb = globalThis as unknown as {
@@ -93,6 +93,28 @@ function initDatabase(): Database.Database {
     CREATE INDEX IF NOT EXISTS idx_envios_created_at ON envios(created_at);
   `);
 
+  // Tabla 3: Tiendas y Agentes Autorizados
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS agentes (
+      id TEXT PRIMARY KEY,
+      pin TEXT NOT NULL,
+      store_name TEXT NOT NULL,
+      contact_name TEXT,
+      address TEXT NOT NULL,
+      city TEXT NOT NULL,
+      state TEXT NOT NULL,
+      zip TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      hours TEXT,
+      lat REAL NOT NULL,
+      lng REAL NOT NULL,
+      is_active INTEGER DEFAULT 1,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE INDEX IF NOT EXISTS idx_agentes_city ON agentes(city);
+    CREATE INDEX IF NOT EXISTS idx_agentes_active ON agentes(is_active);
+  `);
+
   // Semilla inicial si la base de datos está vacía
   const clientCount = db.prepare("SELECT COUNT(*) as count FROM clientes").get() as { count: number };
   if (clientCount.count === 0) {
@@ -171,6 +193,32 @@ function initDatabase(): Database.Database {
     }
   }
 
+  const agentCount = db.prepare("SELECT COUNT(*) as count FROM agentes").get() as { count: number };
+  if (agentCount.count === 0) {
+    const insertAgent = db.prepare(`
+      INSERT INTO agentes (
+        id, pin, store_name, contact_name, address, city, state, zip, phone, hours, lat, lng, is_active
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+    `);
+
+    for (const a of SEED_AGENTS) {
+      insertAgent.run(
+        a.id,
+        a.pin || "ideal2026",
+        a.storeName,
+        a.contactName || "",
+        a.address,
+        a.city,
+        a.state,
+        a.zip,
+        a.phone,
+        a.hours,
+        a.lat,
+        a.lng
+      );
+    }
+  }
+
   globalForDb.idealDb = db;
   return db;
 }
@@ -178,8 +226,118 @@ function initDatabase(): Database.Database {
 export const getDb = () => initDatabase();
 
 // ==========================================
-// MÉTODOS DE NEGOCIO PARA CLIENTES Y ENVÍOS
+// MÉTODOS DE NEGOCIO PARA CLIENTES, ENVÍOS Y AGENTES
 // ==========================================
+
+export function getAllAgentsFromDb(onlyActive = true): Agent[] {
+  const db = getDb();
+  const query = onlyActive
+    ? "SELECT id, store_name, contact_name, address, city, state, zip, phone, hours, lat, lng FROM agentes WHERE is_active = 1 ORDER BY city ASC, store_name ASC"
+    : "SELECT id, store_name, contact_name, address, city, state, zip, phone, hours, lat, lng FROM agentes ORDER BY city ASC, store_name ASC";
+
+  const rows = db.prepare(query).all() as Array<{
+    id: string;
+    store_name: string;
+    contact_name: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    phone: string;
+    hours: string;
+    lat: number;
+    lng: number;
+  }>;
+
+  return rows.map((r) => ({
+    id: r.id,
+    pin: "", // Nunca exponer el PIN en consultas públicas
+    storeName: r.store_name,
+    contactName: r.contact_name,
+    address: r.address,
+    city: r.city,
+    state: r.state,
+    zip: r.zip,
+    phone: r.phone,
+    hours: r.hours,
+    lat: r.lat,
+    lng: r.lng,
+  }));
+}
+
+export function verifyAgentCredentials(agentId: string, pin: string): Agent | null {
+  const db = getDb();
+  const r = db
+    .prepare("SELECT * FROM agentes WHERE id = ? AND pin = ? AND is_active = 1")
+    .get(agentId, pin.trim()) as
+    | {
+        id: string;
+        pin: string;
+        store_name: string;
+        contact_name: string;
+        address: string;
+        city: string;
+        state: string;
+        zip: string;
+        phone: string;
+        hours: string;
+        lat: number;
+        lng: number;
+      }
+    | undefined;
+
+  if (!r) return null;
+  return {
+    id: r.id,
+    pin: "", // Omitir PIN en el objeto de sesión
+    storeName: r.store_name,
+    contactName: r.contact_name,
+    address: r.address,
+    city: r.city,
+    state: r.state,
+    zip: r.zip,
+    phone: r.phone,
+    hours: r.hours,
+    lat: r.lat,
+    lng: r.lng,
+  };
+}
+
+export function getAgentByIdFromDb(id: string): Agent | null {
+  const db = getDb();
+  const r = db.prepare("SELECT * FROM agentes WHERE id = ?").get(id) as
+    | {
+        id: string;
+        pin: string;
+        store_name: string;
+        contact_name: string;
+        address: string;
+        city: string;
+        state: string;
+        zip: string;
+        phone: string;
+        hours: string;
+        lat: number;
+        lng: number;
+      }
+    | undefined;
+
+  if (!r) return null;
+  return {
+    id: r.id,
+    pin: r.pin,
+    storeName: r.store_name,
+    contactName: r.contact_name,
+    address: r.address,
+    city: r.city,
+    state: r.state,
+    zip: r.zip,
+    phone: r.phone,
+    hours: r.hours,
+    lat: r.lat,
+    lng: r.lng,
+  };
+}
 
 export function searchClientsFromDb(query: string): Client[] {
   const db = getDb();

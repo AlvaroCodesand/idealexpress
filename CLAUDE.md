@@ -72,6 +72,9 @@
   - **Pantalla de Búsqueda y Manifiesto (`/portal/envios`):** Búsqueda por número de caja, folio o destinatario, filtro por tienda y reimpresión de recibos/etiquetas QR.
 - **Formulario Inteligente (`/portal/captura`):** Llenado a mano oficial idéntico al papel físico con búsqueda predictiva de clientes y selección de destinatarios en 1 clic.
 - **Plantilla de Impresión Tamaño Carta (`/portal/impresion/[id]`):** Hoja 1 para cliente con firma y términos (plazo 2-3 semanas) y Hoja 2 etiqueta para caja con Código QR.
+- **Tabla Relacional de Agentes (`agentes` en SQLite):**
+  - **Estructura:** `id`, `pin` (cifrado/privado), `store_name`, `contact_name`, `address`, `city`, `state`, `zip`, `phone`, `hours`, `lat`, `lng`, `is_active`.
+  - **Seguridad y Blindaje de PINs:** La columna `pin` está estrictamente excluida de todas las consultas públicas (`GET /api/agentes` y `getAllAgentsFromDb`). La autenticación se realiza del lado del servidor mediante `POST /api/agentes` contra SQLite, impidiendo la exposición de credenciales en el cliente.
 - **Respaldos Automáticos SQLite (`demo/scripts/backup-db.sh`):**
   - **Frecuencia:** Cada 6 horas (`0 */6 * * *` en crontab).
   - **Retención:** 7 días (rotación y purga automática de `.db.gz`).

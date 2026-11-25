@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Shipment } from "@/types";
+import { Shipment, Agent } from "@/types";
 import { SEED_AGENTS } from "@/constants/seedData";
 import {
   Search,
@@ -16,10 +16,22 @@ import {
 } from "lucide-react";
 
 export default function ManifiestoEnviosPage() {
+  const [agentsList, setAgentsList] = useState<Agent[]>(SEED_AGENTS);
   const [searchQuery, setSearchQuery] = useState("");
   const [agentFilter, setAgentFilter] = useState("todos");
   const [shipments, setShipments] = useState<Shipment[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/agentes")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          setAgentsList(json.data);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const loadShipments = async (q = "", agent = "todos") => {
     setLoading(true);
@@ -190,7 +202,7 @@ export default function ManifiestoEnviosPage() {
               className="px-3 py-2.5 text-xs font-bold border border-stone-300 rounded-xl bg-white text-slate-800"
             >
               <option value="todos">Todas las tiendas</option>
-              {SEED_AGENTS.map((a) => (
+              {agentsList.map((a) => (
                 <option key={a.id} value={a.id}>
                   {a.storeName} ({a.city})
                 </option>
