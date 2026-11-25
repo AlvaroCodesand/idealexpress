@@ -80,9 +80,10 @@ function ImpresionEnvioContent() {
   const serviceType = shipment.packageDetails.serviceType || "Regular";
   const boxCode = shipment.packageDetails?.boxNumber || shipment.folio;
 
-  // URL Autónoma Autocontenida (Stateless QR): Contiene todos los datos comprimidos
+  // URL para el código QR con el folio/ID de envío
   const b64Data = encodeShipmentToQR(shipment);
-  const qrUrl = `https://idealexpress.codesand.online/portal/impresion/view?d=${encodeURIComponent(b64Data)}`;
+  const shipmentRef = shipment.id || shipment.folio;
+  const qrUrl = `https://idealexpress.codesand.online/portal/impresion/${encodeURIComponent(shipmentRef)}?d=${encodeURIComponent(b64Data)}`;
 
   return (
     <div className="bg-stone-200 min-h-screen py-8 print:py-0 print:bg-white text-slate-900 font-sans">
@@ -102,7 +103,7 @@ function ImpresionEnvioContent() {
                 Caja Registrada: {boxCode} ({shipment.folio})
               </strong>
               <span className="text-[11px] text-slate-500 font-mono">
-                QR Autónomo Autocontenido (Reconstruye la hoja completa en cualquier celular sin base de datos).
+                Guía oficial generada. Lista para imprimir o consultar en digital.
               </span>
             </div>
           </div>
@@ -533,14 +534,14 @@ function ImpresionEnvioContent() {
             </div>
           </div>
 
-          {/* CÓDIGO QR AUTÓNOMO Y MANIFIESTO */}
+          {/* CÓDIGO QR Y MANIFIESTO */}
           <div className="pt-6 border-t-2 border-dashed border-stone-300 mt-6 flex items-center justify-between gap-6">
             <div className="space-y-1">
               <span className="text-xs font-black uppercase text-slate-900 block font-display">
-                CONTROL DE CRUCE ADUANAL LAREDO
+                CONTROL LOGÍSTICO Y CRUCE ADUANAL
               </span>
               <p className="text-[11px] text-slate-500 max-w-sm leading-relaxed">
-                Código QR autónomo. Al escanear con la cámara del celular abre y reconstruye la Forma de Envío completa en pantalla sin requerir base de datos.
+                Escanee con la cámara de su celular para consultar la guía digital, teléfonos y detalles de entrega a domicilio.
               </p>
               <div className="pt-2 flex items-center gap-2 text-xs font-mono text-slate-700 font-bold">
                 <span>[CAJA: {boxCode}]</span>
