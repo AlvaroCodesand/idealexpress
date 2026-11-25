@@ -72,3 +72,7 @@
   - **Pantalla de Búsqueda y Manifiesto (`/portal/envios`):** Búsqueda por número de caja, folio o destinatario, filtro por tienda y reimpresión de recibos/etiquetas QR.
 - **Formulario Inteligente (`/portal/captura`):** Llenado a mano oficial idéntico al papel físico con búsqueda predictiva de clientes y selección de destinatarios en 1 clic.
 - **Plantilla de Impresión Tamaño Carta (`/portal/impresion/[id]`):** Hoja 1 para cliente con firma y términos (plazo 2-3 semanas) y Hoja 2 etiqueta para caja con Código QR.
+- **Respaldos Automáticos SQLite (`demo/scripts/backup-db.sh`):**
+  - **Frecuencia:** Cada 6 horas (`0 */6 * * *` en crontab).
+  - **Retención:** 7 días (rotación y purga automática de `.db.gz`).
+  - **Mecanismo:** Contenedor Alpine efímero con SQLite online `.backup` y `gzip` sobre el volumen `ideal_data` hacia el host (`/home/ubuntu/backups/idealexpress/`), garantizando consistencia atómica sin detener el servicio.
