@@ -32,7 +32,7 @@ export default function AgentesClient() {
     return matchesCity && matchesSearch;
   });
 
-  const cities = ["todos", "Milwaukee", "Racine", "Sheboygan"];
+  const cities = ["todos", ...Array.from(new Set(SEED_AGENTS.map((a) => a.city)))];
   const waAgentUrl = `https://wa.me/${TARIFF_CONFIG.whatsappNumber}?text=Hola,%20tengo%20un%20negocio%20y%20me%20gustaría%20ser%20agente%20de%20Ideal%20Express.`;
 
   return (
@@ -53,7 +53,7 @@ export default function AgentesClient() {
           <Search size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
-            placeholder="Escribe tu ciudad o código postal (Milwaukee, Racine, Sheboygan)..."
+            placeholder="Escribe tu ciudad, tienda o código postal (Milwaukee, Madison, Kenosha)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-[#0E283F] bg-slate-50 text-[#0E283F] placeholder-slate-500"
