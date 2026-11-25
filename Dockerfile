@@ -23,6 +23,8 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
+RUN apk add --no-cache libc6-compat
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
@@ -32,6 +34,9 @@ RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs && \
     mkdir -p /app/data && \
     chown -R nextjs:nodejs /app/data
+
+# Copiar dependencias nativas compiladas requeridas por serverExternalPackages
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
 
 # Copiar archivos públicos y el build standalone optimizado
 COPY --from=builder /app/public ./public
